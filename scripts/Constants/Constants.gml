@@ -17,8 +17,9 @@ function Constants(){
 		Corps = 2,
 		Division = 3,
 		Regiment = 4,
-		Batallion = 5,
-		Company = 6,
+		Brigade = 5, 
+		Batallion = 6,
+		Company = 7,
 	}
 	
 	enum Type

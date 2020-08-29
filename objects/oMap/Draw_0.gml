@@ -20,19 +20,23 @@ for (var col = 0; col < 26; col += 1;)
 	{
 		if map[col][row]    // convert hex to pixel - now a function
 		{
-			var yRow = (HEXHEIGHT * 0.27) + (row * HEXHEIGHT * 0.75);
+			var yRow = -2 + (HEXHEIGHT * 0.246) + (row * HEXHEIGHT * 0.75);
 			var offset = row & 1;
-			var xCol = (col * HEXWIDTH * 1.004) + (0.5 * HEXWIDTH * offset);
+			var xCol =  -5 + (col * HEXWIDTH * 1.01) + (0.45 * HEXWIDTH * offset);
 			// 1.002 is a fudge factor. My drawn hexes are a tad wider than regular?
 			
 			var hexWithUnit = map[col][row];
-			if hexWithUnit.occupant2
+			
+			if displayUnits
 			{
-				draw_sprite(hexWithUnit.occupant2.picture, -1, xCol, y + 10 + yRow);
-			}
-			if hexWithUnit.occupied
-			{
-				draw_sprite(hexWithUnit.occupant.picture, -1, xCol, y + yRow);
+				if hexWithUnit.occupant2
+				{
+					draw_sprite(hexWithUnit.occupant2.picture, -1, xCol, y + 10 + yRow);
+				}
+				if hexWithUnit.occupied
+				{
+					draw_sprite(hexWithUnit.occupant.picture, -1, xCol, y + yRow);
+				}
 			}
 			
 			if displayControl 

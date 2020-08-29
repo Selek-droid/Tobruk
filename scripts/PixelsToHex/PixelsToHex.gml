@@ -20,7 +20,7 @@ function HexToPixel(col, row)
 	var pixelCoords;
 	var yRow = 102 + (HEXHEIGHT * 0.28) + (row * HEXHEIGHT * 0.75);
 	var offset = row & 1;
-	var xCol = -7 + (col * HEXWIDTH * 1.002) + (0.5 * HEXWIDTH * offset);
+	var xCol = -20 + (col * HEXWIDTH * 1.009) + (0.5 * HEXWIDTH * offset);
 	pixelCoords[0] = xCol;
 	pixelCoords[1] = yRow;
 	return pixelCoords;

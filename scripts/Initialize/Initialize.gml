@@ -13,7 +13,8 @@ function Hex(col, row) constructor
 	occupant = 0;
 	occupant2 = 0;
 	terrain = Terrain.Clear 
-	road = RoadExit.NoRoad;
+	road = false;
+	roadExit = RoadExit.NoRoad;
 	city = Urban.NotUrban;
 	airfield = false;
 	port = false;

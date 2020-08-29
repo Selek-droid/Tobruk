@@ -52,6 +52,7 @@ displayControl = false;
 displayInfluence = false;
 displayStrategic = false;
 hexOverlay = true;
+displayUnits = true;
 
 var emptyHex;   // initialize map; add VP values & AI weights
 for (var col = 0; col < 27; col += 1;)
@@ -65,24 +66,33 @@ for (var col = 0; col < 27; col += 1;)
 	}
 }
 
-	map[0][4].description = "El Agheila";
-	//map[0][4].victoryPoints = 5;
-	//map[0][4].strategicValue = 5;
-	map[0][4].ownedBy = Bloc.Axis;
+	map[1][0].description = "Gazala";
+	map[1][0].strategicValue = 15;
+	map[1][0].road = true;
+	map[1][0].roadExit = RoadExit.SE
 	
-	map[1][1].description = "Benghazi";
-	//map[1][1].victoryPoints = 40;
-	//map[1][1].strategicValue = 40;
-	map[1][1].port = 1;
-	map[1][1].ownedBy = Bloc.Axis;
+	map[1][2].description = "Alem Hamza";
+	map[1][2].strategicValue = 10;
 	
-	map[2][0].description = "Just northeast of Benghazi";
-	// map[2][0].strategicValue = 30;
-	map[2][0].ownedBy = Bloc.Axis;
+	map[2][1].description = "Road from Gazala to Tobruk";
+	map[2][1].strategicValue = 10;
+	map[2][1].road = true;
 	
-	map[2][1].description = "Just east of Benghazi";
-	// map[2][1].strategicValue = 30;
-	map[2][1].ownedBy = Bloc.Axis;
+	map[3][1].description = "Road west of Tobruk";
+	map[3][1].strategicValue = 15;
+	map[3][1].road = true;
+	
+	map[4][1].description = "Road immediately west of Tobruk";
+	map[4][1].strategicValue = 100;
+	map[4][1].road = true;
+	
+	map[5][1].description = "Tobruk";
+	map[5][1].strategicValue = 300;
+	map[5][1].road = true;
+	
+	map[5][2].description = "Road south of Tobruk";
+	map[5][2].strategicValue = 100;
+	map[5][2].road = true;
 	
 	map[2][2].description = "Just southeast of Benghazi";
 	// map[2][2].strategicValue = 30;
@@ -195,7 +205,7 @@ Brit7Arm8Hus.side = Bloc.Allied;
 Brit7Arm8Hus.branch = Type.Armor;
 Brit7Arm8Hus.movement = 6;
 Brit7Arm8Hus.combat = 6;
-Brit7Arm8Hus.size = Formation.Batallion;
+Brit7Arm8Hus.size = Formation.Regiment;
 Brit7Arm8Hus.picture = sBr7Arm8Hus;
 PutUnitInHex(18, 11, Brit7Arm8Hus);
 
@@ -209,41 +219,186 @@ Brit7Arm6RTR.size = Formation.Batallion;
 Brit7Arm6RTR.picture = sBr6RTR;
 PutUnitInHex(19, 10, Brit7Arm6RTR);
 
+Brit7RTR = new LCU();
+Brit7RTR.designation = "British 7th Royal Tank Regiment";
+Brit7RTR.side = Bloc.Allied;
+Brit7RTR.branch = Type.Armor;
+Brit7RTR.movement = 3;
+Brit7RTR.combat = 6;
+Brit7RTR.size = Formation.Regiment;
+Brit7RTR.picture = sBr7RTR;
+PutUnitInHex(17, 10, Brit7RTR);
+
+Brit2RTR = new LCU();
+Brit2RTR.designation = "British 2nd Royal Tank Regiment";
+Brit2RTR.side = Bloc.Allied;
+Brit2RTR.branch = Type.Armor;
+Brit2RTR.movement = 7;
+Brit2RTR.combat = 3;
+Brit2RTR.size = Formation.Regiment;
+Brit2RTR.picture = sBr2RTR;
+PutUnitInHex(17, 11, Brit2RTR);
+
+Brit1RTR = new LCU();
+Brit1RTR.designation = "British 1st Royal Tank Regiment";
+Brit1RTR.side = Bloc.Allied;
+Brit1RTR.branch = Type.Armor;
+Brit1RTR.movement = 8;
+Brit1RTR.combat = 2;
+Brit1RTR.size = Formation.Regiment;
+Brit1RTR.picture = sBr1RTR;
+PutUnitInHex(18, 10, Brit1RTR);
+
+Brit11Hus = new LCU();
+Brit11Hus.designation = "British 11th Hussars";
+Brit11Hus.side = Bloc.Allied;
+Brit11Hus.branch = Type.Armor;
+Brit11Hus.movement = 6;
+Brit11Hus.combat = 2;
+Brit11Hus.size = Formation.Batallion;
+Brit11Hus.picture = sBr11Hus;
+PutUnitInHex(20, 10, Brit11Hus);
+
+Ind5Bde = new LCU();
+Ind5Bde.designation = "Indian 5th Infantry Brigade";
+Ind5Bde.side = Bloc.Allied;
+Ind5Bde.branch = Type.Infantry;
+Ind5Bde.movement = 3;
+Ind5Bde.combat = 6;
+Ind5Bde.size = Formation.Batallion;
+Ind5Bde.picture = sInd5Bde;
+PutUnitInHex(19, 8, Ind5Bde);
+
+Ind11Bde = new LCU();
+Ind11Bde.designation = "Indian 5th Infantry Brigade";
+Ind11Bde.side = Bloc.Allied;
+Ind11Bde.branch = Type.Infantry;
+Ind11Bde.movement = 3;
+Ind11Bde.combat = 6;
+Ind11Bde.size = Formation.Batallion;
+Ind11Bde.picture = sInd11Bde;
+PutUnitInHex(20, 8, Ind5Bde);
+
+Ind7Bde = new LCU();
+Ind7Bde.designation = "Indian 5th Infantry Brigade";
+Ind7Bde.side = Bloc.Allied;
+Ind7Bde.branch = Type.Infantry;
+Ind7Bde.movement = 3;
+Ind7Bde.combat = 6;
+Ind7Bde.size = Formation.Batallion;
+Ind7Bde.picture = sInd7Bde;
+PutUnitInHex(22, 6, Ind7Bde);
+
+Aus16Bde = new LCU();
+Aus16Bde.designation = "Australian 16th Infantry Brigade";
+Aus16Bde.side = Bloc.Allied;
+Aus16Bde.branch = Type.Infantry;
+Aus16Bde.movement = 3;
+Aus16Bde.combat = 6;
+Aus16Bde.size = Formation.Brigade;
+Aus16Bde.picture = sAus16Bde;
+PutUnitInHex(22, 7, Aus16Bde);
+
+Aus17Bde = new LCU();
+Aus17Bde.designation = "Australian 17th Infantry Brigade";
+Aus17Bde.side = Bloc.Allied;
+Aus17Bde.branch = Type.Infantry;
+Aus17Bde.movement = 3;
+Aus17Bde.combat = 6;
+Aus17Bde.size = Formation.Brigade;
+Aus17Bde.picture = sAus17Bde;
+PutUnitInHex(23, 7, Aus17Bde);
+
+Aus19Bde = new LCU();
+Aus19Bde.designation = "Australian 19th Infantry Brigade";
+Aus19Bde.side = Bloc.Allied;
+Aus19Bde.branch = Type.Infantry;
+Aus19Bde.movement = 3;
+Aus19Bde.combat = 6;
+Aus19Bde.size = Formation.Brigade;
+Aus19Bde.picture = sAus19Bde;
+PutUnitInHex(24, 7, Aus19Bde);
+
+OConnor = new LCU();
+OConnor.designation = "O'Connor (Western Desert Corps HQ)";
+OConnor.side = Bloc.Allied;
+OConnor.branch = Type.HQ;
+OConnor.movement = 4;
+OConnor.combat = 0;
+OConnor.size = Formation.Brigade;
+OConnor.picture = sOConnor;
+PutUnitInHex(19, 9, OConnor);
+
+Creagh = new LCU();
+Creagh.designation = "Creagh (7th Armoured Div HQ)";
+Creagh.side = Bloc.Allied;
+Creagh.branch = Type.HQ;
+Creagh.movement = 5;
+Creagh.combat = 0;
+Creagh.size = Formation.Brigade;
+Creagh.picture = sCreagh;
+PutUnitInHex(19, 11, Creagh);
+
+BPeirse = new LCU();
+BPeirse.designation = "Beresford-Peirse (4th Indian Div HQ)";
+BPeirse.side = Bloc.Allied;
+BPeirse.branch = Type.HQ;
+BPeirse.movement = 3;
+BPeirse.combat = 0;
+BPeirse.size = Formation.Brigade;
+BPeirse.picture = sHQBPeirse;
+PutUnitInHex(20, 9, BPeirse);
+
+Mackay = new LCU();
+Mackay.designation = "Mackay (6th Australian Div HQ)";
+Mackay.side = Bloc.Allied;
+Mackay.branch = Type.HQ;
+Mackay.movement = 3;
+Mackay.combat = 0;
+Mackay.size = Formation.Brigade;
+Mackay.picture = sMackay;
+PutUnitInHex(23, 8, Mackay);
 
 
-//India4Inf = new LCU();
-//India4Inf.designation = "Indian 4th Infantry Corps";
-//India4Inf.combat = 5;
-//India4Inf.nationality = Nation.India;
-//India4Inf.picture = sIndian4Inf;
-//PutUnitInHex(10, 2, India4Inf);
 
-//Wavell = new LCU();
-//Wavell.designation = "Wavell HQ";
-//Wavell.combat = 5;
-//Wavell.picture = sUKWavell;
-//PutUnitInHex(9, 3, Wavell);
-
-//Austr6Inf = new LCU();
-//Austr6Inf.designation = "Australian 6th Infantry Corps";
-//Austr6Inf.combat = 5;
-//Austr6Inf.nationality = Nation.Australia;
-//Austr6Inf.picture = sAustr6Inf;
-//PutUnitInHex(8, 5, Austr6Inf);
 
 Italy23Inf = new LCU();
 Italy23Inf.designation = "Italian 23rd Infantry Division";
 Italy23Inf.side = Bloc.Axis;
+Italy23Inf.combat = 8;
+Italy23Inf.movement = 3;
 Italy23Inf.nationality = Nation.Italy;
 Italy23Inf.picture = sIt23InfDiv; 
 PutUnitInHex(13, 4, Italy23Inf);
 
 Italy28Oct = new LCU();
-Italy28Oct.designation = "Italian Blackshirt (28th Oct.) Division";
+Italy28Oct.designation = "Italian Blackshirt (Oct. 28) Division";
+Italy28Oct.combat = 6;
+Italy28Oct.movement = 3;
 Italy28Oct.side = Bloc.Axis;
 Italy28Oct.nationality = Nation.Italy;
 Italy28Oct.picture = sIt28Oct; 
 PutUnitInHex(14, 6, Italy28Oct);
+
+ItalyCatanzaro = new LCU();
+ItalyCatanzaro.designation = "Italian Catanzaro Division";
+ItalyCatanzaro.combat = 8;
+ItalyCatanzaro.movement = 3;
+ItalyCatanzaro.side = Bloc.Axis;
+ItalyCatanzaro.nationality = Nation.Italy;
+ItalyCatanzaro.picture = sItCataznaro; 
+PutUnitInHex(17, 7, ItalyCatanzaro);
+
+ItalyJan3 = new LCU();
+ItalyJan3.designation = "Italian Blackshirt (Jan. 3) Division";
+ItalyJan3.combat = 7;
+ItalyJan3.movement = 3;
+ItalyJan3.side = Bloc.Axis;
+ItalyJan3.nationality = Nation.Italy;
+ItalyJan3.picture = sItJan3; 
+PutUnitInHex(20, 6, ItalyJan3);
+
+
 
 //Italy22Inf = new LCU();
 //Italy22Inf.designation = "Italian 22nd Infantry Corps";

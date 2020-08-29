@@ -56,8 +56,8 @@ function MoveUnitToHex(fromX, fromY, toX, toY, unit)
 		{
 			case Outcome.Win:
 			{
-				oMap.combatMessage = (unit.designation + " wins battle; if target now empty, advance to " +
-				string(toX) + " , " + string(toY));
+				oMap.combatMessage = (unit.designation + " defeats " + targetHex.occupant.designation +
+				"at " + string(toX) + " , " + string(toY));
 		 		
 				if targetHex.occupiedBy2  // eliminate only top of stack, no advance
 				{
