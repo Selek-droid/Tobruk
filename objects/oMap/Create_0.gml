@@ -369,7 +369,7 @@ Italy23Inf.combat = 8;
 Italy23Inf.movement = 3;
 Italy23Inf.nationality = Nation.Italy;
 Italy23Inf.picture = sIt23InfDiv; 
-PutUnitInHex(13, 4, Italy23Inf);
+PutUnitInHex(13, 5, Italy23Inf);
 
 Italy28Oct = new LCU();
 Italy28Oct.designation = "Italian Blackshirt (Oct. 28) Division";
@@ -398,76 +398,83 @@ ItalyJan3.nationality = Nation.Italy;
 ItalyJan3.picture = sItJan3; 
 PutUnitInHex(20, 6, ItalyJan3);
 
+ItalyMar23 = new LCU();
+ItalyMar23.designation = "Italian Blackshirt (Mar. 23) Division";
+ItalyMar23.combat = 7;
+ItalyMar23.movement = 3;
+ItalyMar23.side = Bloc.Axis;
+ItalyMar23.nationality = Nation.Italy;
+ItalyMar23.picture = sItMarch23; 
+PutUnitInHex(14, 7, ItalyMar23);
+
+Italy1stLib = new LCU();
+Italy1stLib.designation = "1st Libyan Division";
+Italy1stLib.combat = 7;
+Italy1stLib.movement = 3;
+Italy1stLib.side = Bloc.Axis;
+Italy1stLib.nationality = Nation.Italy;
+Italy1stLib.picture = sIt1stLib; 
+PutUnitInHex(21, 6, Italy1stLib);
+
+Italy2ndLib = new LCU();
+Italy2ndLib.designation = "2nd Libyan Division";
+Italy2ndLib.combat = 8;
+Italy2ndLib.movement = 3;
+Italy2ndLib.size = Formation.Division;
+Italy2ndLib.side = Bloc.Axis;
+Italy2ndLib.nationality = Nation.Italy;
+Italy2ndLib.picture = sIt2ndLib; 
+PutUnitInHex(20, 7, Italy2ndLib);
+
+ItalyGuardiaBardia = new LCU();
+ItalyGuardiaBardia.designation = "Guardia Frontera Bardia";
+ItalyGuardiaBardia.side = Bloc.Axis;
+ItalyGuardiaBardia.size = Formation.Batallion;
+ItalyGuardiaBardia.combat = 2;
+ItalyGuardiaBardia.movement = 3;
+ItalyGuardiaBardia.picture = sItGuardiaBardia;
+PutUnitInHex(13, 4, ItalyGuardiaBardia);
+
+ItalyGuardia = new LCU();
+ItalyGuardia.designation = "Guardia Frontera Tobruk";
+ItalyGuardia.side = Bloc.Axis;
+ItalyGuardia.size = Formation.Batallion;
+ItalyGuardia.combat = 3;
+ItalyGuardia.movement = 3;
+ItalyGuardia.picture = sItGuardiaTobruk;
+PutUnitInHex(5, 1, ItalyGuardia);
+
+Italy3Med = new LCU();
+Italy3Med.designation = "Italian 3rd Medium Tank Batallion";
+Italy3Med.side = Bloc.Axis;
+Italy3Med.size = Formation.Batallion;
+Italy3Med.branch = Type.Armor
+Italy3Med.combat = 3;
+Italy3Med.movement = 5;
+Italy3Med.picture = sItGuardiaTobruk;
+PutUnitInHex(10, 3, Italy3Med);
+
+Italy21Light = new LCU();
+Italy21Light.designation = "Italian 21st Light Tank Batallion";
+Italy21Light.side = Bloc.Axis;
+Italy21Light.size = Formation.Batallion;
+Italy21Light.branch = Type.Armor;
+Italy21Light.combat = 1;
+Italy21Light.movement = 5;
+Italy21Light.picture = sIt21Light;
+PutUnitInHex(8, 3, Italy21Light);
+
+Italy60Light = new LCU();
+Italy60Light.designation = "Italian 6oth Light Tank Batallion";
+Italy60Light.side = Bloc.Axis;
+Italy60Light.size = Formation.Batallion;
+Italy60Light.branch = Type.Armor;
+Italy60Light.combat = 1;
+Italy60Light.movement = 5;
+Italy60Light.picture = sIt60Light;
+PutUnitInHex(9, 3, Italy60Light);
 
 
-//Italy22Inf = new LCU();
-//Italy22Inf.designation = "Italian 22nd Infantry Corps";
-//Italy22Inf.side = Bloc.Axis;
-//Italy22Inf.nationality = Nation.Italy;
-//Italy22Inf.combat = 4;
-//Italy22Inf.picture = sItaly22Inf; 
-//PutUnitInHex(4, 3, Italy22Inf);
-
-//Italy21Inf = new LCU();
-//Italy21Inf.designation = "Italian 21st Infantry Corps";
-//Italy21Inf.side = Bloc.Axis;
-//Italy21Inf.nationality = Nation.Italy;
-//Italy21Inf.picture = sItaly21Inf; 
-//PutUnitInHex(7, 4, Italy21Inf);
-
-//Italy20Mot = new LCU();
-//Italy20Mot.designation = "Italian 20th Motorized Corps";
-//Italy20Mot.side = Bloc.Axis;
-//Italy20Mot.nationality = Nation.Italy;
-//Italy20Mot.branch = Type.Motorized;
-//Italy20Mot.picture = sItaly20Mot;
-//Italy20Mot.combat = 4;
-//Italy20Mot.movement = 6;
-//PutUnitInHex(2, 4, Italy20Mot);
-
-//LibyaPescatore = new LCU();
-//LibyaPescatore.designation = "Libyan Pescatore Division";
-//LibyaPescatore.side = Bloc.Axis;
-//LibyaPescatore.nationality = Nation.Libya;
-//LibyaPescatore.size = Formation.Division;
-//LibyaPescatore.combat = 1;
-//LibyaPescatore.movement = 3;
-//LibyaPescatore.picture = sLibPescatore;
-//PutUnitInHex(6, 2, LibyaPescatore);
-
-//LibyaSibille = new LCU();
-//LibyaSibille.designation = "Libyan Sibille Division";
-//LibyaSibille.side = Bloc.Axis;
-//LibyaSibille.nationality = Nation.Libya;
-//LibyaSibille.size = Formation.Division;
-//LibyaSibille.combat = 1;
-//LibyaSibille.movement = 3;
-//LibyaSibille.picture = sLibSibille;
-//PutUnitInHex(8, 2, LibyaSibille);
-
-//ItalyGennaio = new LCU();
-//ItalyGennaio.designation = "Italian Gennaio Division";
-//ItalyGennaio.side = Bloc.Axis;
-//ItalyGennaio.size = Formation.Division;
-//ItalyGennaio.combat = 1;
-//ItalyGennaio.picture = sItalyGennaio96pxV2;
-//PutUnitInHex(7, 4, ItalyGennaio);
-
-//ItalyGuardiaBardia = new LCU();
-//ItalyGuardiaBardia.designation = "Guardia Frontera Bardia";
-//ItalyGuardiaBardia.side = Bloc.Axis;
-//ItalyGuardiaBardia.size = Formation.Division;
-//ItalyGuardiaBardia.combat = 1;
-//ItalyGuardiaBardia.picture = sItalyGuardiaBardia;
-//PutUnitInHex(7, 5, ItalyGuardiaBardia);
-
-//ItalyGuardia = new LCU();
-//ItalyGuardia.designation = "Guardia Frontera";
-//ItalyGuardia.side = Bloc.Axis;
-//ItalyGuardia.size = Formation.Division;
-//ItalyGuardia.combat = 1;
-//ItalyGuardia.picture = sItalyGuardia;
-//PutUnitInHex(5, 0, ItalyGuardia);
 
 
 ds_list_add(enemiesOnMap,Italy23Inf);  // Eventually: switch 'enemies' depending on Player side
