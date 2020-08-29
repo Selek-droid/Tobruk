@@ -142,9 +142,9 @@ for (var col = 0; col < 26; col += 1;)
 }
 
 draw_set_color(c_black);
-draw_text(50,100,string(mapCoordinates));
+draw_text(50,200,string(mapCoordinates));
 // draw_text(50,150,"Neighbor 1: " + string(neighbor));
-draw_text(50,200,string(mouse_x) + " , " + string(mouse_y));
+draw_text(50,300,string(mouse_x) + " , " + string(mouse_y));
 draw_set_color(c_white);
 
 if needPath

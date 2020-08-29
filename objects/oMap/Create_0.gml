@@ -191,6 +191,7 @@ for (var col = 0; col < 26; col += 1;)
 
 Brit7Arm8Hus = new LCU();
 Brit7Arm8Hus.designation = "British 6th Royal Tank Regiment";
+Brit7Arm8Hus.side = Bloc.Allied;
 Brit7Arm8Hus.branch = Type.Armor;
 Brit7Arm8Hus.movement = 6;
 Brit7Arm8Hus.combat = 6;
@@ -200,6 +201,7 @@ PutUnitInHex(18, 11, Brit7Arm8Hus);
 
 Brit7Arm6RTR = new LCU();
 Brit7Arm6RTR.designation = "British 8th Hussars Batallion";
+Brit7Arm6RTR.side = Bloc.Allied;
 Brit7Arm6RTR.branch = Type.Armor;
 Brit7Arm6RTR.movement = 5;
 Brit7Arm6RTR.combat = 8;

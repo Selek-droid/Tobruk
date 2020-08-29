@@ -9,7 +9,7 @@ function Constants(){
 	#macro HEXWIDTH 42.5 * sqrt(3)
 	#macro HEXHEIGHT 85 //               was 154
 	#macro HEXRADIUS 42.5 ///              was 77 
-	#macro MAPTOPEDGE 0
+	#macro MAPTOPEDGE 120
 	
 	enum Formation
 	{
