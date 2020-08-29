@@ -1,12 +1,15 @@
 {
   "resources": [
+    {"id":{"name":"Initialize","path":"scripts/Initialize/Initialize.yy",},"order":1,},
     {"id":{"name":"sHexOverlay","path":"sprites/sHexOverlay/sHexOverlay.yy",},"order":1,},
     {"id":{"name":"oMap","path":"objects/oMap/oMap.yy",},"order":0,},
     {"id":{"name":"Constants","path":"scripts/Constants/Constants.yy",},"order":0,},
+    {"id":{"name":"sIt28Oct","path":"sprites/sIt28Oct/sIt28Oct.yy",},"order":4,},
     {"id":{"name":"sBr7Arm8Hus","path":"sprites/sBr7Arm8Hus/sBr7Arm8Hus.yy",},"order":3,},
     {"id":{"name":"oGame","path":"objects/oGame/oGame.yy",},"order":1,},
     {"id":{"name":"sIt23InfDiv","path":"sprites/sIt23InfDiv/sIt23InfDiv.yy",},"order":2,},
     {"id":{"name":"sMap","path":"sprites/sMap/sMap.yy",},"order":0,},
+    {"id":{"name":"sBr6RTR","path":"sprites/sBr6RTR/sBr6RTR.yy",},"order":5,},
     {"id":{"name":"Room1","path":"rooms/Room1/Room1.yy",},"order":0,},
   ],
   "Options": [
