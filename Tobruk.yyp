@@ -2,6 +2,7 @@
   "resources": [
     {"id":{"name":"sHexOverlay","path":"sprites/sHexOverlay/sHexOverlay.yy",},"order":1,},
     {"id":{"name":"oMap","path":"objects/oMap/oMap.yy",},"order":0,},
+    {"id":{"name":"Constants","path":"scripts/Constants/Constants.yy",},"order":0,},
     {"id":{"name":"sBr7Arm8Hus","path":"sprites/sBr7Arm8Hus/sBr7Arm8Hus.yy",},"order":3,},
     {"id":{"name":"oGame","path":"objects/oGame/oGame.yy",},"order":1,},
     {"id":{"name":"sIt23InfDiv","path":"sprites/sIt23InfDiv/sIt23InfDiv.yy",},"order":2,},
