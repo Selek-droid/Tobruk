@@ -13,6 +13,7 @@
     {"id":{"name":"sIt23InfDiv","path":"sprites/sIt23InfDiv/sIt23InfDiv.yy",},"order":2,},
     {"id":{"name":"sWhiteHighlight","path":"sprites/sWhiteHighlight/sWhiteHighlight.yy",},"order":6,},
     {"id":{"name":"sMap","path":"sprites/sMap/sMap.yy",},"order":0,},
+    {"id":{"name":"sHighlightedHex","path":"sprites/sHighlightedHex/sHighlightedHex.yy",},"order":15,},
     {"id":{"name":"sBr6RTR","path":"sprites/sBr6RTR/sBr6RTR.yy",},"order":5,},
     {"id":{"name":"Room1","path":"rooms/Room1/Room1.yy",},"order":0,},
   ],

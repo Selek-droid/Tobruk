@@ -15,6 +15,7 @@ if oGame.state == "Player Turn"
 		if targetHex.occupied && (targetHex.occupant.side == global.PlayerSide)
 		{
 			mapCoordinates = coords;  // store location of starting hex. Again, improve var name?
+			show_debug_message("Clicked hex is: " + string(coords));
 			var mapX = mapCoordinates[0];
 			var mapY = mapCoordinates[1];
 			BreadthSearch(mapX, mapY, targetHex.occupant.movement);

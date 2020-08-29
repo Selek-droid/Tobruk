@@ -54,7 +54,7 @@ displayStrategic = false;
 hexOverlay = true;
 
 var emptyHex;   // initialize map; add VP values & AI weights
-for (var col = 0; col < 26; col += 1;)
+for (var col = 0; col < 27; col += 1;)
 {
 	for (var row = 0; row < 15; row += 1;)
 	{

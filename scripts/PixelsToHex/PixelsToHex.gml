@@ -18,9 +18,9 @@ function PixelsToHex(col, row)
 function HexToPixel(col, row)
 {
 	var pixelCoords;
-	var yRow = 19 + (HEXHEIGHT * 0.28) + (row * HEXHEIGHT * 0.75);
+	var yRow = 102 + (HEXHEIGHT * 0.28) + (row * HEXHEIGHT * 0.75);
 	var offset = row & 1;
-	var xCol = 13 + (col * HEXWIDTH * 1.002) + (0.5 * HEXWIDTH * offset);
+	var xCol = -7 + (col * HEXWIDTH * 1.002) + (0.5 * HEXWIDTH * offset);
 	pixelCoords[0] = xCol;
 	pixelCoords[1] = yRow;
 	return pixelCoords;
@@ -40,9 +40,10 @@ function PixelsToPointyHex(pointX, pointY)
 	cubeCoords = CubeRound(q, r, s);  // rounds cube coords, returns array of 3 coords
 	var cubeQ = cubeCoords[0];
 	var cubeR = cubeCoords[1];
-	var cubeS = cubeCoords[2];
+	var cubeS = cubeCoords[1];
 	show_debug_message("Cubes are Q: " + string(cubeQ) + " , r: " + string(cubeR) + " , s: " + string(cubeS));
 	offsetCoords = CubeToOddr(cubeQ, cubeR, cubeS); // converts 3 cube coords to 2 offset
+	offsetCoords[0] += 1;
 	show_debug_message("Offset coords are " + string(offsetCoords));
 	
 	return offsetCoords;  // an array of 2 coordinates
