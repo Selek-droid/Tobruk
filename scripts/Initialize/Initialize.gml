@@ -22,7 +22,7 @@ function Hex(col, row) constructor
 	offense = 1;
 	playerBuff = 0;
 	opponentBuff = 0;
-	ownedBy = Bloc.Allied;
+	ownedBy = Bloc.Neutral;
 	howFarAway = 0;
 	combatStrength = 0;
 	victoryPoints = 0;

@@ -26,7 +26,10 @@ function BreadthSearch(col, row, movement)
 			var nextHex = FindNeighbor(xx, yy, i); 
 			if HowFar(nextHex,startHex) > movement
 			{
-				break;
+				show_debug_message("Breadthsearch halted after mvmt over " + string(movement));
+				ds_list_destroy(frontier); 
+				ds_list_destroy(visited); 
+				exit;
 			}
             if ! IsInList(nextHex, visited, ds_list_size(visited))  // unvisited neighbor hex
 			{
@@ -50,10 +53,12 @@ function BreadthSearch(col, row, movement)
 						if oMap.AIPosture == AIState.FindingThreats
 						{
 							ds_list_add(possibleThreats, nextHex);
+							oMap.needPath = false;
 						}
 						else
 						{
 							ds_list_add(oMap.possibleMoves, nextHex);
+							show_debug_message("Next poss move: " + string(nextHex));
 							oMap.needPath = false;
 						}
 					}

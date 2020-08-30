@@ -43,8 +43,8 @@ longestOrder = 0;
 // parentHex = 0;
 parentHex = new HexContainer();
 
-//addedHex = new Hex(0, 0);  // not needed?
-//addedHex.playerBuff = 0;   // not needed?
+addedHex = new Hex(0, 0);  // not needed?
+addedHex.playerBuff = 0;   // not needed?
 
 // parentUnit = 0;
 parentUnit = new UnitContainer();
@@ -62,8 +62,13 @@ for (var col = 0; col < 27; col += 1;)
 	{
 		emptyHex = new Hex(col,row);
 		map[col][row] = emptyHex;
-		if col <= 13	{ map[col][row].ownedBy = Bloc.Axis; }
-		else { map[col][row].ownedBy = Bloc.Allied;}
+		if ValidLocation(col, row)
+		{
+			if col <= 16	{ map[col][row].ownedBy = Bloc.Axis; }
+			else { map[col][row].ownedBy = Bloc.Allied;}
+		}
+		else map[col][row].ownedBy = Bloc.Neutral;
+		
 	}
 }
 
@@ -103,98 +108,10 @@ for (var col = 0; col < 27; col += 1;)
 	// map[1][2].strategicValue = 30;
 	map[1][2].ownedBy = Bloc.Axis;
 	
-	map[5][0].description = "Derna";
-	map[5][0].strategicValue = 30;
-	map[5][0].victoryPoints = 30;
-	map[5][0].ownedBy = Bloc.Axis;
-	
-	map[5][1].description = "Gazala";
-	map[5][1].strategicValue = 10;
-	map[5][1].victoryPoints = 10;
-	map[5][1].ownedBy = Bloc.Axis;
-	
-	map[6][1].description = "Tobruk";
-	map[6][1].victoryPoints = 70;
-	map[6][1].strategicValue = 70;
-	map[6][1].port = 1;
-	map[6][1].ownedBy = Bloc.Axis;
-	
-	map[6][2].description = "Just southwest of Tobruk";
-	map[6][2].strategicValue = 40;
-	map[6][2].ownedBy = Bloc.Axis;
-	
-	map[7][1].description = "Just northeast of Tobruk";
-	map[7][1].strategicValue = 40;
-	map[7][1].ownedBy = Bloc.Axis;
-	
-	map[7][2].description = "Just southeast of Tobruk";
-	map[7][2].strategicValue = 40;
-	map[7][2].ownedBy = Bloc.Axis;
-	
-	map[7][3].description = "Fort Madellena";
-	// map[7][3].strategicValue = 30;
-	map[7][2].ownedBy = Bloc.Axis;
-	
-	map[8][2].description = "Bardia";
-	// map[8][2].strategicValue = 30;
-	map[8][2].port = 1;
-	// map[8][2].victoryPoints = 30;
-	map[8][2].ownedBy = Bloc.Axis;
-	
-	map[8][3].description = "South of Bardia";
-	//map[8][3].strategicValue = 10;
-	
-	//map[8][4].strategicValue = 10;
-	//map[8][5].strategicValue = 5;
-	
-	map[7][4].description = "South of Fort Madellena";
-	//map[7][4].strategicValue = 10;
-	map[7][4].ownedBy = Bloc.Axis;
-	
-	map[6][4].description = "Far south of Fort Madellena";
-	//map[6][4].strategicValue = 10;
-	map[7][4].ownedBy = Bloc.Axis;
-	
-	map[9][2].description = "Sidi Barrani";
-	//map[9][2].strategicValue = 10;
-	//map[9][2].victoryPoints = 10;
-	map[9][2].ownedBy = Bloc.Allied;
-	
-	//map[9][3].strategicValue = 10;
-	//map[9][4].strategicValue = 5;
-	//map[9][5].strategicValue = 2;
-	
-	//map[10][2].strategicValue = 15;
-	//map[10][3].strategicValue = 5;
-	
-	map[11][2].description = "Mersa Matruh";
-	//map[11][2].strategicValue = 20;
-	//map[11][2].victoryPoints = 20;
-	map[11][2].ownedBy = Bloc.Allied;
-	
-	map[11][3].description = "Baggush";
-	// map[11][3].strategicValue = 20;
-	// map[11][3].victoryPoints = 20;
-	map[11][3].ownedBy = Bloc.Allied;
-	
-	map[12][3].description = "El Daba";
-	// map[12][3].strategicValue = 20;
-	// map[12][3].victoryPoints = 20;
-	map[12][3].ownedBy = Bloc.Allied;
-	
-	map[13][3].description = "El Alamein";
-	// map[13][3].strategicValue = 40;
-	// map[13][3].victoryPoints = 40;
-	map[13][3].strategicValue = 0;
-	map[13][3].ownedBy = Bloc.Allied;
 	
 	
 	
 	
-	
-	show_debug_message("Important hex is " + string(map[6][1].strategicValue));
-	
-	show_debug_message("It is " + (map[6][1].description));
 
 #endregion
 
@@ -360,8 +277,7 @@ Mackay.size = Formation.Brigade;
 Mackay.picture = sMackay;
 PutUnitInHex(23, 8, Mackay);
 
-
-
+// ********************** ITALY ***********************************
 
 Italy23Inf = new LCU();
 Italy23Inf.designation = "Italian 23rd Infantry Division";
@@ -432,7 +348,7 @@ ItalyGuardiaBardia.designation = "Guardia Frontera Bardia";
 ItalyGuardiaBardia.side = Bloc.Axis;
 ItalyGuardiaBardia.size = Formation.Batallion;
 ItalyGuardiaBardia.combat = 2;
-ItalyGuardiaBardia.movement = 3;
+ItalyGuardiaBardia.movement = 2;
 ItalyGuardiaBardia.picture = sItGuardiaBardia;
 PutUnitInHex(13, 4, ItalyGuardiaBardia);
 
@@ -441,7 +357,7 @@ ItalyGuardia.designation = "Guardia Frontera Tobruk";
 ItalyGuardia.side = Bloc.Axis;
 ItalyGuardia.size = Formation.Batallion;
 ItalyGuardia.combat = 3;
-ItalyGuardia.movement = 3;
+ItalyGuardia.movement = 1;
 ItalyGuardia.picture = sItGuardiaTobruk;
 PutUnitInHex(5, 1, ItalyGuardia);
 
@@ -486,7 +402,7 @@ ItalyAresca.picture = sItAresca;
 PutUnitInHex(12, 3, ItalyAresca);
 
 ItalyMaletti = new LCU();
-ItalyMaletti.designation = "Italian Aresca HQ";
+ItalyMaletti.designation = "Italian Maletti HQ";
 ItalyMaletti.side = Bloc.Axis;
 ItalyMaletti.size = Formation.Batallion;
 ItalyMaletti.branch = Type.HQ;
@@ -496,7 +412,7 @@ ItalyMaletti.picture = sItMaletti;
 PutUnitInHex(5, 3, ItalyMaletti);
 
 ItalyLibyaHQ = new LCU();
-ItalyLibyaHQ.designation = "Italian Aresca HQ";
+ItalyLibyaHQ.designation = "Italian Libya Corps HQ";
 ItalyLibyaHQ.side = Bloc.Axis;
 ItalyLibyaHQ.size = Formation.Corps;
 ItalyLibyaHQ.branch = Type.HQ;
@@ -506,23 +422,21 @@ ItalyLibyaHQ.picture = sItLibyaHQ;
 PutUnitInHex(19, 6, ItalyLibyaHQ);
 
 
-
-
-
-
-
-
-
-
 ds_list_add(enemiesOnMap,Italy23Inf);  // Eventually: switch 'enemies' depending on Player side
-//ds_list_add(enemiesOnMap,Italy21Inf);
-//ds_list_add(enemiesOnMap,Italy22Inf);
-//ds_list_add(enemiesOnMap,Italy23Inf);
-//ds_list_add(enemiesOnMap,LibyaPescatore);
-//ds_list_add(enemiesOnMap,LibyaSibille);
-//ds_list_add(enemiesOnMap,ItalyGennaio);
-//ds_list_add(enemiesOnMap,ItalyGuardia);
-//ds_list_add(enemiesOnMap,ItalyGuardiaBardia);
+ds_list_add(enemiesOnMap,Italy28Oct);
+ds_list_add(enemiesOnMap,ItalyCatanzaro);
+ds_list_add(enemiesOnMap,ItalyJan3);
+ds_list_add(enemiesOnMap,ItalyMar23);
+ds_list_add(enemiesOnMap,Italy1stLib);
+ds_list_add(enemiesOnMap,Italy2ndLib);
+ds_list_add(enemiesOnMap,ItalyGuardia);
+ds_list_add(enemiesOnMap,ItalyGuardiaBardia);
+ds_list_add(enemiesOnMap,Italy3Med);
+ds_list_add(enemiesOnMap,Italy21Light);
+ds_list_add(enemiesOnMap,Italy60Light);
+ds_list_add(enemiesOnMap,ItalyAresca);
+ds_list_add(enemiesOnMap,ItalyMaletti);
+ds_list_add(enemiesOnMap,ItalyLibyaHQ);
 
 #endregion
 

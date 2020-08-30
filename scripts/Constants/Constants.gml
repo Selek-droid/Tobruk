@@ -34,6 +34,7 @@ function Constants(){
 	{
 		Allied  = 1,
 		Axis = 2,
+		Neutral = 3,
 	}
 	
 	enum Nation

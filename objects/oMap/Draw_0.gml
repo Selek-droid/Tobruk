@@ -51,11 +51,11 @@ for (var col = 0; col < 26; col += 1;)
 				var pixelCoords = HexToPixel(col, row);
 				if hexWithUnit.ownedBy == Bloc.Allied 
 				{
-					draw_sprite_ext(sWhiteHighlight, -1, pixelCoords[0], pixelCoords[1], 1, 1, 0, c_yellow, 1);
+					draw_sprite_ext(sOwnedBritHex, -1, pixelCoords[0], pixelCoords[1], 1, 1, 0, c_yellow, 1);
 				}
-				else
+				else if hexWithUnit.ownedBy == Bloc.Axis 
 				{
-					draw_sprite_ext(sHighlightedHex, -1, pixelCoords[0], pixelCoords[1], 1, 1, 0, c_white, 1);
+					draw_sprite_ext(sOwnedItalianHex, -1, pixelCoords[0], pixelCoords[1], 1, 1, 0, c_white, 1);
 				}
 			} 
 			
@@ -65,32 +65,32 @@ for (var col = 0; col < 26; col += 1;)
 				var influence = hexWithUnit.tacticalValue;
 				if influence > 200
 				{
-					draw_sprite_ext(sHighlightedHex, -1, pixelCoords[0], pixelCoords[1], 1, 1, 0, c_black, 1);
+					draw_sprite_ext(sBlueHex, -1, pixelCoords[0], pixelCoords[1], 1, 1, 0, c_black, 1);
 				}
 				
 				else if (influence > 150) && (influence <= 200)
 				{
-					draw_sprite_ext(sWhiteHighlight, -1, pixelCoords[0], pixelCoords[1], 1, 1, 0, c_red, 1);
+					draw_sprite_ext(sBlueHex, -1, pixelCoords[0], pixelCoords[1], 1, 1, 0, c_red, 1);
 				}
 				
 				else if (influence > 100) && (influence <= 150)
 				{
-					draw_sprite_ext(sWhiteHighlight, -1, pixelCoords[0], pixelCoords[1], 1, 1, 0, c_green, 1);
+					draw_sprite_ext(sBlueHex, -1, pixelCoords[0], pixelCoords[1], 1, 1, 0, c_green, 1);
 				}
 				
 				else if (influence > 50) && (influence <= 100)
 				{
-					draw_sprite_ext(sWhiteHighlight, -1, pixelCoords[0], pixelCoords[1], 1, 1, 0, c_green, 0.75);
+					draw_sprite_ext(sBlueHex, -1, pixelCoords[0], pixelCoords[1], 1, 1, 0, c_green, 0.75);
 				}
 				
 				else if (influence > 0) && (influence <= 50)
 				{
-					draw_sprite_ext(sWhiteHighlight, -1, pixelCoords[0], pixelCoords[1], 1, 1, 0, c_green, 0.5);
+					draw_sprite_ext(sBlueHex, -1, pixelCoords[0], pixelCoords[1], 1, 1, 0, c_green, 0.5);
 				}
 				
 				else if (influence <= 0) 
 				{
-					draw_sprite_ext(sWhiteHighlight, -1, pixelCoords[0], pixelCoords[1], 1, 1, 0, c_aqua, 0.25);
+					draw_sprite_ext(sBlueHex, -1, pixelCoords[0], pixelCoords[1], 1, 1, 0, c_aqua, 0.25);
 				}
 				
 			}
@@ -152,11 +152,11 @@ for (var col = 0; col < 26; col += 1;)
 	}
 }
 
-draw_set_color(c_black);
-draw_text(50,200,string(mapCoordinates));
-// draw_text(50,150,"Neighbor 1: " + string(neighbor));
-draw_text(50,300,string(mouse_x) + " , " + string(mouse_y));
-draw_set_color(c_white);
+//draw_set_color(c_black);
+//draw_text(50,200,string(mapCoordinates));
+//// draw_text(50,150,"Neighbor 1: " + string(neighbor));
+//draw_text(50,300,string(mouse_x) + " , " + string(mouse_y));
+//draw_set_color(c_white);
 
 if needPath
 {
