@@ -474,6 +474,42 @@ Italy60Light.movement = 5;
 Italy60Light.picture = sIt60Light;
 PutUnitInHex(9, 3, Italy60Light);
 
+ItalyAresca = new LCU();
+ItalyAresca.designation = "Italian Aresca HQ";
+ItalyAresca.side = Bloc.Axis;
+ItalyAresca.size = Formation.Batallion;
+ItalyAresca.branch = Type.HQ;
+ItalyAresca.combat = 0;
+ItalyAresca.movement = 4;
+ItalyAresca.picture = sItAresca;
+PutUnitInHex(12, 3, ItalyAresca);
+
+ItalyMaletti = new LCU();
+ItalyMaletti.designation = "Italian Aresca HQ";
+ItalyMaletti.side = Bloc.Axis;
+ItalyMaletti.size = Formation.Batallion;
+ItalyMaletti.branch = Type.HQ;
+ItalyMaletti.combat = 0;
+ItalyMaletti.movement = 4;
+ItalyMaletti.picture = sItMaletti;
+PutUnitInHex(5, 3, ItalyMaletti);
+
+ItalyLibyaHQ = new LCU();
+ItalyLibyaHQ.designation = "Italian Aresca HQ";
+ItalyLibyaHQ.side = Bloc.Axis;
+ItalyLibyaHQ.size = Formation.Corps;
+ItalyLibyaHQ.branch = Type.HQ;
+ItalyLibyaHQ.combat = 0;
+ItalyLibyaHQ.movement = 4;
+ItalyLibyaHQ.picture = sItLibyaHQ;
+PutUnitInHex(19, 6, ItalyLibyaHQ);
+
+
+
+
+
+
+
 
 
 
