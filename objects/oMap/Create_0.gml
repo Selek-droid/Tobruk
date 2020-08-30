@@ -37,6 +37,7 @@ spriteAlpha = 1;
 turn = 1;
 impulse = 0;
 combatMessage = "Awaiting orders";
+combatOdds = "No combat to report";
 firstImpulse = false;
 longestOrder = 0;
 // parentHex = 0;

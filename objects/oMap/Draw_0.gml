@@ -35,7 +35,14 @@ for (var col = 0; col < 26; col += 1;)
 				}
 				if hexWithUnit.occupied
 				{
+					if hexWithUnit.occupant.steps == 1
+					{
+						draw_sprite(hexWithUnit.occupant.pictureDamaged, -1, xCol, y + yRow);
+					}
+					else
+					{
 					draw_sprite(hexWithUnit.occupant.picture, -1, xCol, y + yRow);
+					}
 				}
 			}
 			

@@ -178,14 +178,13 @@ if oGame.state == "WEGO"
 	{
 		if (numberWithOrders > 0) && (impulse < 8)
 		{
-			show_debug_message("Impulse number " + string(impulse));
+			
 			for (var i = 0; i < numberWithOrders; i += 1;)	
 			{
 				var orderedUnit = ds_list_find_value(whoHasOrders, i);
 				
 				var moveLength = array_length(orderedUnit.orders); 
-				//show_debug_message(orderedUnit.designation + "orders : " +
-				//	string(orderedUnit.orders));
+				
 				if moveLength - impulse > 0
 				{
 					var nextHex = orderedUnit.orders[moveLength - 1 - impulse]; 

@@ -1,5 +1,6 @@
 {
   "resources": [
+    {"id":{"name":"sUIBar","path":"sprites/sUIBar/sUIBar.yy",},"order":35,},
     {"id":{"name":"sItGuardiaBardia","path":"sprites/sItGuardiaBardia/sItGuardiaBardia.yy",},"order":26,},
     {"id":{"name":"sOConnor","path":"sprites/sOConnor/sOConnor.yy",},"order":17,},
     {"id":{"name":"sIt21Light","path":"sprites/sIt21Light/sIt21Light.yy",},"order":28,},
@@ -8,8 +9,10 @@
     {"id":{"name":"sHexOverlay","path":"sprites/sHexOverlay/sHexOverlay.yy",},"order":1,},
     {"id":{"name":"sInd11Bde","path":"sprites/sInd11Bde/sInd11Bde.yy",},"order":12,},
     {"id":{"name":"oMap","path":"objects/oMap/oMap.yy",},"order":0,},
+    {"id":{"name":"oUIBar","path":"objects/oUIBar/oUIBar.yy",},"order":2,},
     {"id":{"name":"Pathfinding","path":"scripts/Pathfinding/Pathfinding.yy",},"order":4,},
     {"id":{"name":"Evaluate","path":"scripts/Evaluate/Evaluate.yy",},"order":5,},
+    {"id":{"name":"sBr7RTR_OOS","path":"sprites/sBr7RTR_OOS/sBr7RTR_OOS.yy",},"order":36,},
     {"id":{"name":"sBr2RTR","path":"sprites/sBr2RTR/sBr2RTR.yy",},"order":8,},
     {"id":{"name":"sIt60Light","path":"sprites/sIt60Light/sIt60Light.yy",},"order":29,},
     {"id":{"name":"sBr7RTR","path":"sprites/sBr7RTR/sBr7RTR.yy",},"order":7,},
@@ -43,6 +46,7 @@
     {"id":{"name":"sHighlightedHex","path":"sprites/sHighlightedHex/sHighlightedHex.yy",},"order":31,},
     {"id":{"name":"sItLibyaHQ","path":"sprites/sItLibyaHQ/sItLibyaHQ.yy",},"order":34,},
     {"id":{"name":"sBr6RTR","path":"sprites/sBr6RTR/sBr6RTR.yy",},"order":5,},
+    {"id":{"name":"sBr7RTRDamaged","path":"sprites/sBr7RTRDamaged/sBr7RTRDamaged.yy",},"order":37,},
     {"id":{"name":"Room1","path":"rooms/Room1/Room1.yy",},"order":0,},
   ],
   "Options": [

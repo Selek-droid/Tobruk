@@ -40,9 +40,12 @@ function LCU() constructor
 	size = Formation.Division;
 	movement = 3;
 	combat = 3;
+	steps = 2;
 	orders[0] = 0;
 	ordersSet = false;
 	picture = sIt23InfDiv;
+	pictureDamaged = sBr7RTRDamaged;
+	pictureOOS = sBr7RTR_OOS;
 	onMap = true;
 	coordX = 0;
 	coordY = 0;

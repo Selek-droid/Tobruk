@@ -81,6 +81,10 @@ function Constants(){
 		Loss = 0,
 		Win = 1,
 		DefenderRetreat = 2,
+		
+		DefenderStepLoss = 3,
+		AttackerStepLoss = 4,
+		Inconclusive = 5,
 	}
 	
 	enum AIState

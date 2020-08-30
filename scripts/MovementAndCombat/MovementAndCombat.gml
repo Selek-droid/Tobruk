@@ -54,14 +54,35 @@ function MoveUnitToHex(fromX, fromY, toX, toY, unit)
 		var outcome = Battle(unit, targetHex.occupant, fromX, fromY, toX, toY);
 		switch outcome
 		{
-			case Outcome.Win:
+			case Outcome.Inconclusive:
 			{
-				oMap.combatMessage = (unit.designation + " defeats " + targetHex.occupant.designation +
-				"at " + string(toX) + " , " + string(toY));
-		 		
-				if targetHex.occupiedBy2  // eliminate only top of stack, no advance
+				if keyboard_check_pressed(vk_anykey) 
 				{
-					show_debug_message("No advance because enemy hex still has 1 unit");
+					oMap.combatMessage = "Attack by " + unit.designation + " was inconclusive.";
+					return false;
+				}
+				break;
+			}
+			
+			case Outcome.DefenderStepLoss:
+			{
+				if keyboard_check_pressed(vk_anykey) 
+				{
+					oMap.combatMessage = (unit.designation + " hits " + targetHex.occupant.designation +
+					"at " + string(toX) + " , " + string(toY));
+				}
+				
+				targetHex.occupant.steps -= 1;
+				
+				if targetHex.occupant.steps > 0   // still alive, so exit
+				{
+					targetHex.occupant.combat = targetHex.occupant.combat / 2;
+					targetHex.occupant.orders = 0;
+					return true;
+				}
+				
+				if targetHex.occupiedBy2  // Top unit out of steps, so lower takes its place.
+				{
 					targetHex.occupant.onMap = false; // not using this variable yet
 					targetHex.occupant = targetHex.occupant2; // shift lower enemy unit to top
 					targetHex.occupant2 = 0;
@@ -71,7 +92,7 @@ function MoveUnitToHex(fromX, fromY, toX, toY, unit)
 					break;
 				}
 			
-				else 
+				else   // Unit was alone, so eliminate. Permit advance?
 				{
 					wasUnitOnTop = unit.topUnit;
 					targetHex.occupied = true;
@@ -85,26 +106,35 @@ function MoveUnitToHex(fromX, fromY, toX, toY, unit)
 					return true;
 					break;
 				}
-			}
-			
-			case Outcome.DefenderRetreat:
-			{
-				oMap.combatMessage = (unit.designation + " possibly advanced into " +
-					string(toX) + " , " + string(toY) + "after forcing retreat by " +
-					targetHex.occupant.designation);
-				show_debug_message(unit.designation + " possibly advanced into " +
-					string(toX) + " , " + string(toY) + "after forcing retreat by " +
-					targetHex.occupant.designation);
-				return true;  // Retreat function already did any advance
 				break;
-			
 			}
 			
-			case Outcome.Loss:
+			case Outcome.AttackerStepLoss:
 			{
-				unit.orders = 0;
-				oMap.combatMessage = ("Failed attack by " + unit.designation);
-				show_debug_message("Failed attack by " + unit.designation);
+				unit.steps -= 1;
+				
+				if unit.steps > 0   // still alive, so exit
+				{
+					unit.combat = floor(unit.combat / 2);
+					unit.orders = 0;
+					if keyboard_check_pressed(vk_space) 
+					{
+						oMap.combatMessage = (unit.designation + " damaged by " + targetHex.occupant.designation );
+					}
+					return false;
+				}
+				
+				else  // unit destroyed
+				{
+					unit.orders = 0;
+					unit.onMap = false;
+					if keyboard_check_pressed(vk_space) 
+					{
+						oMap.combatOdds = unit.designation + " destroyed while amking failed assault";
+					}
+					
+					CleanDepartedHex(departedHex, true);
+				}
 				return false;
 				break;
 			}
@@ -151,11 +181,22 @@ function CleanDepartedHex(departedHex, topUnit)
 	}
 }
 
+
 function Battle(attacker, defender, attackerFromX, attackerFromY, battleX, battleY) // fromX is attacker's origin hex. battleX is battlehex.
 {
 	var attackPower = attacker.combat;
 	var defensePower = defender.combat;
 	var battleHex = oMap.map[battleX][battleY];
+	
+	if defender.combat == 0 && attacker.combat > 0 
+	{
+		return Outcome.DefenderStepLoss;
+	}
+	else if defender.combat == 0 
+	{
+		return Outcome.Inconclusive;
+	}
+	
 	if attacker.side == global.PlayerSide
 	{
 		attackPower += battleHex.playerBuff;
@@ -166,144 +207,125 @@ function Battle(attacker, defender, attackerFromX, attackerFromY, battleX, battl
 		attackPower += battleHex.opponentBuff;
 		defensePower += battleHex.playerBuff;
 	}
-	//if battleHex.playerBuff {show_debug_message("Player buffed by " + string(battleHex.playerBuff));}
-	//if battleHex.opponentBuff {show_debug_message("Opponent buffed by " + string(battleHex.opponentBuff));	}	
+		
+	var odds = floor (10 * (attackPower / defensePower)); // so 10 is 1:1 odds; 20 is 2:1
+	//	show_debug_message("Odds are " + string(odds/10) + " : 1");
+	//oUIBar.combatMessage = attacker.designation + " attacks " + defender.designation + 
+	//	" at modified odds of " + string(odds);
+	
+	if (attackPower < defensePower)
+	{
+		if odds < 10 && odds >= 6 
+		{
+			return Outcome.Inconclusive;
+		}
+		else if odds < 6 && odds >= 0
+		{
+			var d10Roll = irandom(10);
+			oMap.combatOdds = ( "Die roll: " + string(d10Roll));
+			if d10Roll >= 9
+			{
+				attacker.orders = 0;
+				defender.orders = 0;
+				oUIBar.combatMessage = attacker.designation + "takes a step loss after failed attack";
+			}
+			else 
+			{
+				attacker.orders = 0;
+				defender.orders = 0;
+				oUIBar.combatMessage = "Combat is inconclusive";
+				return Outcome.Inconclusive;
+			}
+		}
+	}
 	
 	if (attackPower >= defensePower )
 	{
-		var odds = floor (10 * (attackPower / defensePower)); // so 10 is 1:1 odds; 20 is 2:1
-		show_debug_message("Odds are " + string(odds/10) + " : 1");
-		if odds < 10 
+		var dieRoll = irandom(100);
+		oMap.combatOdds = ("d100 roll: " + string(dieRoll));
+		if dieRoll < ((2 * odds) - 10 )  // remember, odds is 10 times the odds, so 1:1 is 10, 3:1 is 30.
 		{
-			Retreat(attacker, attackerFromX, attackerFromY, battleX, battleY, true);
-			oMap.combatMessage = (attacker.designation + " retreating from failed attack on " +
-					defender.designation + " at " + 
-					string(battleX) + " , " + string(battleY));
-			show_debug_message(attacker.designation + " retreating from failed attack on " +
-					defender.designation + " at " + 
-					string(battleX) + " , " + string(battleY));
-			return Outcome.Loss;
+			oMap.combatMessage = (attacker.designation + " inflicts a hit on " + defender.designation);
+			defender.orders = 0;
+			attacker.orders = 0;
+			return Outcome.DefenderStepLoss;
 		}
-		
-		var dieRoll = irandom(10);
-		show_debug_message("Die roll: " + string(dieRoll));
-		if odds >= 10
+		else
 		{
-			if (odds > 10 * dieRoll )  // nice low DR, defender eliminated
-			{
-				oMap.combatMessage = (defender.designation + " eliminated by " + attacker.designation);
-				show_debug_message(defender.designation + " eliminated by " + attacker.designation);
-				defender.onMap = false;
-				return Outcome.Win;
-			}
-			
-			else if (odds <= 10 * dieRoll) && (odds >= 3 * dieRoll) // ok roll, D retreat
-			{
-				defender.orders = 0;  // Retreat will return true if only one D in hex.
-				oMap.combatMessage = (defender.designation + " retreating after attacked at " + 
-					string(battleX) + " , " + string(battleY));
-				show_debug_message(defender.designation + " retreating after attacked at " + 
-					string(battleX) + " , " + string(battleY));
-					
-					// causing too many retreats in one go?  
-					
-				if Retreat(defender, attackerFromX, attackerFromY, battleX, battleY, false)
-				{
-					ShiftUnit(attacker,attackerFromX,attackerFromY,battleX,battleY,true);
-				}
-				else
-				{
-					attacker.orders = 0;  // target hex not empty, so attacker must halt movement.
-				}
-				
-				return Outcome.DefenderRetreat;  //  D not eliminated, but attacker can advance
-			}
-			
-			else  // bad roll, attacker retreats; maybe add attacker elim later?
-			{
-				attacker.orders = 0;
-				// Retreat(attacker, attackerFromX, attackerFromY, battleX, battleY, true);
-				oMap.combatMessage = (attacker.designation + " retreating from failed attack at " + 
-					string(battleX) + " , " + string(battleY));
-				show_debug_message(attacker.designation + " retreating from failed attack at " + 
-					string(battleX) + " , " + string(battleY));
-				return Outcome.Loss;
-			}
+			attacker.orders = 0;
+			defender.orders = 0;
+			return Outcome.Inconclusive;
 		}
-	}
-	else // redundant after "odds < 10" above, but may implement more alternatives -- e.g., attacker elim
-	{
-		// Retreat(attacker, attackerFromX, attackerFromY, battleX, battleY, true);
-		show_debug_message(attacker.designation + " auto-retreats because < 1:1 odds.");
-		return Outcome.Loss;
 	}
 }
 
-function Retreat(retreater, attackerCameFromX, attackerCameFromY, battleX, battleY, wasAttacker)
-{
-	var dir = FindDirection(attackerCameFromX, attackerCameFromY, battleX, battleY);
-	var retreatCoords = FindNeighbor(battleX, battleY, dir);
-	var battleHex = oMap.map[battleX][battleY];
-	oMap.combatMessage = (retreater.designation + " testing retreat to: " + string(retreatCoords));
-	show_debug_message(retreater.designation + " testing retreat to: " + string(retreatCoords));
+
+
+//function Retreat(retreater, attackerCameFromX, attackerCameFromY, battleX, battleY, wasAttacker)
+//{
+//	var dir = FindDirection(attackerCameFromX, attackerCameFromY, battleX, battleY);
+//	var retreatCoords = FindNeighbor(battleX, battleY, dir);
+//	var battleHex = oMap.map[battleX][battleY];
+//	oMap.combatMessage = (retreater.designation + " testing retreat to: " + string(retreatCoords));
+//	show_debug_message(retreater.designation + " testing retreat to: " + string(retreatCoords));
 	
-	if ValidLocation(retreatCoords[0], retreatCoords[1]) &&
-		!EnemyControlled(retreatCoords, retreater.side) &&
-		!FriendlyHexFull(retreatCoords, retreater.side)
-	{
-		ShiftUnit(retreater, battleX, battleY, retreatCoords[0], retreatCoords[1], false);
-		if battleHex.occupied  // second unit remains, so no advance
-		{
-			return false;
-		}
-		else return true;
-	}
+//	if ValidLocation(retreatCoords[0], retreatCoords[1]) &&
+//		!EnemyControlled(retreatCoords, retreater.side) &&
+//		!FriendlyHexFull(retreatCoords, retreater.side)
+//	{
+//		ShiftUnit(retreater, battleX, battleY, retreatCoords[0], retreatCoords[1], false);
+//		if battleHex.occupied  // second unit remains, so no advance
+//		{
+//			return false;
+//		}
+//		else return true;
+//	}
 			
-	else
-	{
-		var dirAdjust = irandom(1) ;  // try left or right, randomly
-		if dirAdjust
-		{
-			var altDir = dir - dirAdjust;
-			if altDir < 0 {altDir = 5;} 
-			var alt2Dir = altDir + 2;
-			if alt2Dir == 6 {alt2Dir = 0;}
-			if alt2Dir == 7 {alt2Dir = 1;}
-		}
-		else 
-		{
-			altDir = dir + dirAdjust;
-			if altDir > 5 {altDir = 0;}
-			var alt2Dir = altDir - 2;
-			if alt2Dir == -1 {alt2Dir = 5;}
-			if alt2Dir == -2 {alt2Dir = 4;}
-		}
-		retreatCoords = FindNeighbor(battleX, battleY, altDir);
-		if ValidLocation(retreatCoords[0], retreatCoords[1]) &&
-			!EnemyControlled(retreatCoords, retreater.side) &&
-			!FriendlyHexFull(retreatCoords, retreater.side)
-		{
-			ShiftUnit(retreater, battleX, battleY, retreatCoords[0], retreatCoords[1], false);
-			if battleHex.occupied  // second unit remains, so no advance
-			{
-				return false;
-			}
-			else return true;
-		}
-		else retreatCoords = FindNeighbor(battleX, battleY, alt2Dir);
-		if ValidLocation(retreatCoords[0], retreatCoords[1]) &&
-			!EnemyControlled(retreatCoords, retreater.side) &&
-			!FriendlyHexFull(retreatCoords, retreater.side)
-		{
-			ShiftUnit(retreater, battleX, battleY, retreatCoords[0], retreatCoords[1], false);
-			if battleHex.occupied  // second unit remains, so no advance
-			{
-				return false;
-			}
-			else return true;
-		}
-	}
-}
+//	else
+//	{
+//		var dirAdjust = irandom(1) ;  // try left or right, randomly
+//		if dirAdjust
+//		{
+//			var altDir = dir - dirAdjust;
+//			if altDir < 0 {altDir = 5;} 
+//			var alt2Dir = altDir + 2;
+//			if alt2Dir == 6 {alt2Dir = 0;}
+//			if alt2Dir == 7 {alt2Dir = 1;}
+//		}
+//		else 
+//		{
+//			altDir = dir + dirAdjust;
+//			if altDir > 5 {altDir = 0;}
+//			var alt2Dir = altDir - 2;
+//			if alt2Dir == -1 {alt2Dir = 5;}
+//			if alt2Dir == -2 {alt2Dir = 4;}
+//		}
+//		retreatCoords = FindNeighbor(battleX, battleY, altDir);
+//		if ValidLocation(retreatCoords[0], retreatCoords[1]) &&
+//			!EnemyControlled(retreatCoords, retreater.side) &&
+//			!FriendlyHexFull(retreatCoords, retreater.side)
+//		{
+//			ShiftUnit(retreater, battleX, battleY, retreatCoords[0], retreatCoords[1], false);
+//			if battleHex.occupied  // second unit remains, so no advance
+//			{
+//				return false;
+//			}
+//			else return true;
+//		}
+//		else retreatCoords = FindNeighbor(battleX, battleY, alt2Dir);
+//		if ValidLocation(retreatCoords[0], retreatCoords[1]) &&
+//			!EnemyControlled(retreatCoords, retreater.side) &&
+//			!FriendlyHexFull(retreatCoords, retreater.side)
+//		{
+//			ShiftUnit(retreater, battleX, battleY, retreatCoords[0], retreatCoords[1], false);
+//			if battleHex.occupied  // second unit remains, so no advance
+//			{
+//				return false;
+//			}
+//			else return true;
+//		}
+//	}
+//}
 
 function FindAlternateRetreat(battleX, battleY, altDir)
 {
