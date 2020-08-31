@@ -391,6 +391,7 @@ Brit7Arm8Hus.movement = 6;
 Brit7Arm8Hus.combat = 6;
 Brit7Arm8Hus.size = Formation.Regiment;
 Brit7Arm8Hus.picture = sBr7Arm8Hus;
+Brit7Arm8Hus.pictureDamaged = red8Hus;
 Brit7Arm8Hus.victoryValue = 3;
 PutUnitInHex(18, 11, Brit7Arm8Hus);
 
@@ -402,6 +403,7 @@ Brit7Arm6RTR.movement = 5;
 Brit7Arm6RTR.combat = 8;
 Brit7Arm6RTR.size = Formation.Batallion;
 Brit7Arm6RTR.picture = sBr6RTR;
+Brit7Arm6RTR.pictureDamaged = red2RTR;
 Brit7Arm6RTR.victoryValue = 4;
 PutUnitInHex(19, 10, Brit7Arm6RTR);
 
@@ -413,6 +415,7 @@ Brit7RTR.movement = 3;
 Brit7RTR.combat = 6;
 Brit7RTR.size = Formation.Regiment;
 Brit7RTR.picture = sBr7RTR;
+Brit7RTR.pictureDamaged = red1RTR;
 PutUnitInHex(17, 10, Brit7RTR);
 
 Brit2RTR = new LCU();
@@ -423,6 +426,8 @@ Brit2RTR.movement = 7;
 Brit2RTR.combat = 3;
 Brit2RTR.size = Formation.Regiment;
 Brit2RTR.picture = sBr2RTR;
+Brit2RTR.pictureDamaged = red1RTR;
+
 Brit2RTR.victoryValue = 2;
 PutUnitInHex(17, 11, Brit2RTR);
 
@@ -434,6 +439,7 @@ Brit1RTR.movement = 8;
 Brit1RTR.combat = 2;
 Brit1RTR.size = Formation.Regiment;
 Brit1RTR.picture = sBr1RTR;
+Brit1RTR.pictureDamaged = red1RTR;
 Brit1RTR.victoryValue = 2;
 PutUnitInHex(18, 10, Brit1RTR);
 
@@ -445,6 +451,7 @@ Brit11Hus.movement = 6;
 Brit11Hus.combat = 2;
 Brit11Hus.size = Formation.Batallion;
 Brit11Hus.picture = sBr11Hus;
+Brit11Hus.pictureDamaged = redBr11HUS;
 Brit11Hus.victoryValue = 2;
 PutUnitInHex(20, 10, Brit11Hus);
 
@@ -456,28 +463,31 @@ Ind5Bde.movement = 3;
 Ind5Bde.combat = 6;
 Ind5Bde.size = Formation.Batallion;
 Ind5Bde.picture = sInd5Bde;
+Ind5Bde.pictureDamaged = redInd5;
 Ind5Bde.victoryValue = 3;
 PutUnitInHex(19, 8, Ind5Bde);
 
 Ind11Bde = new LCU();
-Ind11Bde.designation = "Indian 5th Infantry Brigade";
+Ind11Bde.designation = "Indian 11th Infantry Brigade";
 Ind11Bde.side = Bloc.Allied;
 Ind11Bde.branch = Type.Infantry;
 Ind11Bde.movement = 3;
 Ind11Bde.combat = 6;
 Ind11Bde.size = Formation.Batallion;
 Ind11Bde.picture = sInd11Bde;
+Ind11Bde.pictureDamaged = redInd11;
 Ind11Bde.victoryValue = 3;
 PutUnitInHex(20, 8, Ind5Bde);
 
 Ind7Bde = new LCU();
-Ind7Bde.designation = "Indian 5th Infantry Brigade";
+Ind7Bde.designation = "Indian 7th Infantry Brigade";
 Ind7Bde.side = Bloc.Allied;
 Ind7Bde.branch = Type.Infantry;
 Ind7Bde.movement = 3;
 Ind7Bde.combat = 6;
 Ind7Bde.size = Formation.Batallion;
 Ind7Bde.picture = sInd7Bde;
+Ind7Bde.pictureDamaged = redInd7;
 Ind7Bde.victoryValue = 3;
 PutUnitInHex(22, 6, Ind7Bde);
 
@@ -489,6 +499,7 @@ Aus16Bde.movement = 3;
 Aus16Bde.combat = 6;
 Aus16Bde.size = Formation.Brigade;
 Aus16Bde.picture = sAus16Bde;
+Aus16Bde.pictureDamaged = red16aus;
 Aus16Bde.victoryValue = 3;
 PutUnitInHex(22, 7, Aus16Bde);
 
@@ -500,6 +511,7 @@ Aus17Bde.movement = 3;
 Aus17Bde.combat = 6;
 Aus17Bde.size = Formation.Brigade;
 Aus17Bde.picture = sAus17Bde;
+Aus17Bde.pictureDamaged = red17Aus;
 PutUnitInHex(23, 7, Aus17Bde);
 
 Aus19Bde = new LCU();
@@ -510,6 +522,7 @@ Aus19Bde.movement = 3;
 Aus19Bde.combat = 6;
 Aus19Bde.size = Formation.Brigade;
 Aus19Bde.picture = sAus19Bde;
+Aus19Bde.pictureDamaged = red16aus;
 PutUnitInHex(24, 7, Aus19Bde);
 
 OConnor = new LCU();
@@ -520,6 +533,7 @@ OConnor.movement = 4;
 OConnor.combat = 0;
 OConnor.size = Formation.Brigade;
 OConnor.picture = sOConnor;
+OConnor.pictureDamaged = sOConnor;
 PutUnitInHex(19, 9, OConnor);
 
 Creagh = new LCU();
@@ -530,6 +544,7 @@ Creagh.movement = 5;
 Creagh.combat = 0;
 Creagh.size = Formation.Brigade;
 Creagh.picture = sCreagh;
+Creagh.pictureDamaged = redCreagh;
 PutUnitInHex(19, 11, Creagh);
 
 BPeirse = new LCU();
@@ -540,6 +555,7 @@ BPeirse.movement = 3;
 BPeirse.combat = 0;
 BPeirse.size = Formation.Brigade;
 BPeirse.picture = sHQBPeirse;
+BPeirse.pictureDamaged = redIndHQ;
 PutUnitInHex(20, 9, BPeirse);
 
 Mackay = new LCU();
@@ -550,6 +566,7 @@ Mackay.movement = 3;
 Mackay.combat = 0;
 Mackay.size = Formation.Brigade;
 Mackay.picture = sMackay;
+Mackay.pictureDamaged = sMackay;
 PutUnitInHex(23, 8, Mackay);
 
 // ********************** ITALY ***********************************
@@ -561,6 +578,7 @@ Italy23Inf.combat = 8;
 Italy23Inf.movement = 3;
 Italy23Inf.nationality = Nation.Italy;
 Italy23Inf.picture = sIt23InfDiv; 
+Italy23Inf.pictureDamaged = red23ItalInf; 
 Italy23Inf.victoryValue = 4;
 PutUnitInHex(13, 5, Italy23Inf);
 
@@ -571,6 +589,7 @@ Italy28Oct.movement = 3;
 Italy28Oct.side = Bloc.Axis;
 Italy28Oct.nationality = Nation.Italy;
 Italy28Oct.picture = sIt28Oct; 
+Italy28Oct.pictureDamaged = red28Blackshirt; 
 PutUnitInHex(14, 6, Italy28Oct);
 
 ItalyCatanzaro = new LCU();
@@ -580,6 +599,7 @@ ItalyCatanzaro.movement = 3;
 ItalyCatanzaro.side = Bloc.Axis;
 ItalyCatanzaro.nationality = Nation.Italy;
 ItalyCatanzaro.picture = sItCataznaro; 
+ItalyCatanzaro.pictureDamaged = redCatanaro; 
 ItalyCatanzaro.victoryValue = 4;
 PutUnitInHex(17, 7, ItalyCatanzaro);
 
@@ -590,6 +610,7 @@ ItalyJan3.movement = 3;
 ItalyJan3.side = Bloc.Axis;
 ItalyJan3.nationality = Nation.Italy;
 ItalyJan3.picture = sItJan3; 
+ItalyJan3.pictureDamaged = redItalJan3; 
 ItalyJan3.victoryValue = 4;
 PutUnitInHex(20, 6, ItalyJan3);
 
@@ -600,6 +621,7 @@ ItalyMar23.movement = 3;
 ItalyMar23.side = Bloc.Axis;
 ItalyMar23.nationality = Nation.Italy;
 ItalyMar23.picture = sItMarch23; 
+ItalyMar23.pictureDamaged = redItMar23; 
 ItalyMar23.victoryValue = 4;
 PutUnitInHex(14, 7, ItalyMar23);
 
@@ -610,6 +632,7 @@ Italy1stLib.movement = 3;
 Italy1stLib.side = Bloc.Axis;
 Italy1stLib.nationality = Nation.Italy;
 Italy1stLib.picture = sIt1stLib; 
+Italy1stLib.pictureDamaged = redIt1Libyan; 
 Italy1stLib.victoryValue = 4;
 PutUnitInHex(21, 6, Italy1stLib);
 
@@ -621,6 +644,7 @@ Italy2ndLib.size = Formation.Division;
 Italy2ndLib.side = Bloc.Axis;
 Italy2ndLib.nationality = Nation.Italy;
 Italy2ndLib.picture = sIt2ndLib; 
+Italy2ndLib.pictureDamaged = redIt2ndLib; 
 Italy2ndLib.victoryValue = 4;
 PutUnitInHex(20, 7, Italy2ndLib);
 
@@ -631,6 +655,7 @@ ItalyGuardiaBardia.size = Formation.Batallion;
 ItalyGuardiaBardia.combat = 2;
 ItalyGuardiaBardia.movement = 0;
 ItalyGuardiaBardia.picture = sItGuardiaBardia;
+ItalyGuardiaBardia.pictureDamaged = redBardia;
 ItalyGuardiaBardia.victoryValue = 2;
 PutUnitInHex(13, 4, ItalyGuardiaBardia);
 
@@ -641,6 +666,7 @@ ItalyGuardia.size = Formation.Batallion;
 ItalyGuardia.combat = 3;
 ItalyGuardia.movement = 0;
 ItalyGuardia.picture = sItGuardiaTobruk;
+ItalyGuardia.pictureDamaged = redTobruk;
 PutUnitInHex(5, 1, ItalyGuardia);
 
 Italy3Med = new LCU();
@@ -651,6 +677,7 @@ Italy3Med.branch = Type.Armor
 Italy3Med.combat = 3;
 Italy3Med.movement = 5;
 Italy3Med.picture = sIt3Med;
+Italy3Med.pictureDamaged = redItal3Med;
 PutUnitInHex(10, 3, Italy3Med);
 
 Italy21Light = new LCU();
@@ -661,6 +688,7 @@ Italy21Light.branch = Type.Armor;
 Italy21Light.combat = 1;
 Italy21Light.movement = 5;
 Italy21Light.picture = sIt21Light;
+Italy21Light.pictureDamaged = redIt60Light;
 Italy21Light.victoryValue = 2;
 PutUnitInHex(8, 3, Italy21Light);
 
@@ -672,6 +700,7 @@ Italy60Light.branch = Type.Armor;
 Italy60Light.combat = 1;
 Italy60Light.movement = 5;
 Italy60Light.picture = sIt60Light;
+Italy60Light.pictureDamaged = redIt60Light;
 Italy60Light.victoryValue = 2;
 PutUnitInHex(9, 3, Italy60Light);
 
@@ -683,6 +712,7 @@ ItalyAresca.branch = Type.HQ;
 ItalyAresca.combat = 0;
 ItalyAresca.movement = 4;
 ItalyAresca.picture = sItAresca;
+ItalyAresca.pictureDamaged = redAresca;
 PutUnitInHex(12, 3, ItalyAresca);
 
 ItalyMaletti = new LCU();
@@ -693,6 +723,7 @@ ItalyMaletti.branch = Type.HQ;
 ItalyMaletti.combat = 0;
 ItalyMaletti.movement = 4;
 ItalyMaletti.picture = sItMaletti;
+ItalyMaletti.pictureDamaged = redMalettiHQ;
 PutUnitInHex(5, 3, ItalyMaletti);
 
 ItalyLibyaHQ = new LCU();
@@ -703,6 +734,7 @@ ItalyLibyaHQ.branch = Type.HQ;
 ItalyLibyaHQ.combat = 0;
 ItalyLibyaHQ.movement = 4;
 ItalyLibyaHQ.picture = sItLibyaHQ;
+ItalyLibyaHQ.pictureDamaged = redLibyaHQCorps;
 PutUnitInHex(19, 6, ItalyLibyaHQ);
 
 
