@@ -151,7 +151,7 @@ function IsInList(hex, hexList, listSize)
 }
 
 
-function FindNeighbor(col, row, direction)
+function FindNeighbor(col, row, direction)  // returns an array of 2
 {
 	var neighbor;
 	var OddrDirections = 

@@ -211,11 +211,23 @@ function Battle(attacker, defender, attackerFromX, attackerFromY, battleX, battl
 	var defensePower = defender.combat;
 	var battleHex = oMap.map[battleX][battleY];
 	
+	if attacker.side == Bloc.Axis
+	{
+		attackPower = floor(attackPower * (1 / battleHex.supplyPenalty));
+	}
+	
+	if defender.side == Bloc.Axis
+	{
+		show_debug_message("Defense power was " + string(defensePower));
+		defensePower = floor(defensePower * (1 / battleHex.supplyPenalty));
+		show_debug_message("Defense power was reduced to " + string(defensePower));
+	}
+	
 	if defender.combat == 0 && attacker.combat > 0 
 	{
 		return Outcome.DefenderStepLoss;
 	}
-	else if defender.combat == 0 
+	else if defender.combat == 0  && attacker.combat == 0
 	{
 		return Outcome.Inconclusive;
 	}

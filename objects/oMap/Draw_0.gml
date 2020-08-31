@@ -44,7 +44,14 @@ for (var col = 0; col < 26; col += 1;)
 					{
 					draw_sprite(hexWithUnit.occupant.picture, -1, xCol, y + yRow);
 					}
+					
+					//if !hexWithUnit.occupant.supplied
+					//{
+					//	var pixelCoords = HexToPixel(col, row);
+					//	draw_sprite_ext(sRedHex, -1, pixelCoords[0], pixelCoords[1], 1, 1, 0, c_white, 0.5);
+					//}
 				}
+				
 			}
 			
 			if displayControl 
@@ -59,6 +66,16 @@ for (var col = 0; col < 26; col += 1;)
 					draw_sprite_ext(sOwnedItalianHex, -1, pixelCoords[0], pixelCoords[1], 1, 1, 0, c_white, 1);
 				}
 			} 
+			
+			if displaySupply
+			{
+				var pixelCoords = HexToPixel(col, row);
+				if hexWithUnit.supplyPenalty > 1
+				{
+					draw_sprite_ext(sRedHex, -1, pixelCoords[0], pixelCoords[1], 1, 1, 0, c_white, 0.5);
+				}
+				
+			}
 			
 			if displayInfluence
 			{

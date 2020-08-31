@@ -18,8 +18,8 @@ function Hex(col, row) constructor
 	town = false;
 	airfield = false;
 	port = false;
+	supplyPenalty = 1;
 	defense = 1;
-	offense = 1;
 	playerBuff = 0;
 	opponentBuff = 0;
 	ownedBy = Bloc.Neutral;
@@ -28,7 +28,8 @@ function Hex(col, row) constructor
 	victoryPoints = 0;
 	strategicValue = 0;
 	tacticalValue = 0;
-	description = "Desert";
+	inSupply = true;
+	description = "the Western Desert";
 }
 
 function LCU() constructor
@@ -50,6 +51,7 @@ function LCU() constructor
 	coordX = 0;
 	coordY = 0;
 	topUnit = true;
+	supplied = true;
 	victoryValue = 3;
 }
 

@@ -9,10 +9,27 @@ if oGame.state == "Player Turn"
 		DeclareVictory();
 	}
 	
+	CheckSupply();
+	
+	//audio_play_sound(aEgyptPubDomain, 10, true);
+	
+	//if keyboard_check_pressed(ord("M") ) && musicOn
+	//{
+	//	audio_stop_sound(aEgyptPubDomain);
+	//	keyboard_clear(ord("M"));
+	//	musicOn = false;
+	//}
+	
+	//else if keyboard_check_pressed(ord("M") ) && !musicOn
+	//{
+	//audio_play_sound(aEgyptPubDomain, 10, true);
+	//musicOn = true;
+	//}
+	
 	if mouse_check_button_pressed(mb_left) && (! hexAlreadySelected)
 	{
 		oUIBar.eventsMessage = "Once you finish ordering units, hit ENTER.";
-		oUIBar.flavorMessage = "Then give the AI a moment to think! Then hit SPACE.";
+		oUIBar.flavorMessage = "Then please give the AI a moment to think!";
 		
 		needPath = false;  // reset path highlighting after click
 		ds_list_clear(highlightedHexes); 
@@ -115,10 +132,11 @@ if oGame.state == "Player Turn"
 
 		waitForAI = true;
 		// oMap.combatMessage = "Executing orders; PLEASE WAIT.";
-		show_debug_message("WaitForAI var is " + string(waitForAI));
+		// show_debug_message("WaitForAI var is " + string(waitForAI));
 		keyboard_clear(vk_enter);
 		needPath = false;
 		// oGame.state = "Wait Popup";
+		parentHex.setAll("tacticalValue", 0);
 		oGame.state = "Opponent Turn";
 	}
 }
@@ -174,7 +192,7 @@ if oGame.state == "Opponent Turn"
 	}
 	
 	ds_list_clear(possibleMoves);
-	parentHex.setAll("tacticalValue", 0);
+	
 	// oMap.combatMessage = "Press spacebar to proceed to next impulse.";
 	waitForAI = false;
 	firstImpulse = true;

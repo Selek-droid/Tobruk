@@ -32,13 +32,13 @@ enemiesOnMap = ds_list_create();
 
 needPath = false;
 hexAlreadySelected = false;
-spriteAlpha = 1;
+// spriteAlpha = 1;
 
 turn = 1;
 waitForAI = false;
 impulse = 0;
 combatMessage = "Awaiting orders";
-combatOdds = "No combat to report";
+// combatOdds = "No combat to report";
 firstImpulse = false;
 longestOrder = 0;
 // parentHex = 0;
@@ -55,6 +55,8 @@ displayInfluence = false;
 displayStrategic = false;
 hexOverlay = true;
 displayUnits = true;
+// musicOn = true;
+displaySupply = false;
 
 var emptyHex;   // initialize map; add VP values & AI weights
 for (var col = 0; col < 27; col += 1;)
@@ -79,7 +81,7 @@ for (var col = 0; col < 27; col += 1;)
 	map[1][0].roadExit = RoadExit.SE
 	map[1][0].town = true;
 	
-	map[1][1].description = "Road from Tobruk to Gazala";
+	map[1][1].description = "the dry, dusty road from Tobruk to Gazala";
 	map[1][1].strategicValue = 15;
 	map[1][1].road = true;
 	
@@ -87,7 +89,7 @@ for (var col = 0; col < 27; col += 1;)
 	map[1][2].strategicValue = 30;
 	map[1][2].town = true;
 	
-	map[2][1].description = "Road from Gazala to Tobruk";
+	map[2][1].description = "the dusty road from Gazala to Tobruk";
 	map[2][1].strategicValue = 10;
 	map[2][1].road = true;
 	
@@ -96,8 +98,12 @@ for (var col = 0; col < 27; col += 1;)
 	map[2][6].town = true;
 	
 	map[6][7].description = "Bir el-Ghubi";
-	map[6][7].strategicValue = 60;
+	map[6][7].strategicValue = 100;
 	map[6][7].town = true;
+	
+	map[6][6].description = "the dry desert north of Bir el-Ghubi";
+	map[6][6].strategicValue = 100;
+	map[6][6].town = false;
 	
 	map[7][12].description = "El Cuasc";
 	map[7][12].strategicValue = 10;
@@ -116,15 +122,23 @@ for (var col = 0; col < 27; col += 1;)
 	map[19][13].town = true;
 	
 	map[9][8].description = "Gabr Saleh";
-	map[9][8].strategicValue = 50;
+	map[9][8].strategicValue = 100;
 	map[9][8].town = true;
 	
-	map[3][1].description = "Road west of Tobruk";
+	map[9][7].description = "the deserted wastes north of Gabr Saleh";
+	map[9][7].strategicValue = 100;
+	map[9][7].town = false;
+	
+	map[8][7].description = "north of Gabr Saleh";
+	map[8][7].strategicValue = 100;
+	map[8][7].town = false;
+	
+	map[3][1].description = "the road west of Tobruk";
 	map[3][1].strategicValue = 20;
 	map[3][1].road = true;
 	
-	map[4][1].description = "Road immediately west of Tobruk";
-	map[4][1].strategicValue = 100;
+	map[4][1].description = "the road immediately west of Tobruk";
+	map[4][1].strategicValue = 90;
 	map[4][1].road = true;
 	
 	map[5][1].description = "Tobruk";
@@ -133,36 +147,36 @@ for (var col = 0; col < 27; col += 1;)
 	map[5][1].town = true;
 	map[5][1].victoryPoints = 100;
 	
-	map[5][2].description = "Road just south of Tobruk";
+	map[5][2].description = "the key road just south of Tobruk";
 	map[5][2].strategicValue = 100;
 	map[5][2].road = true;
 	
 	map[5][3].description = "El Adam";
-	map[5][3].strategicValue = 50;
+	map[5][3].strategicValue = 95;
 	map[5][3].road = true;
 	map[5][3].town = true;
 	
-	map[4][5].description = "Desert near El Adam";
+	map[4][5].description = "the desolate desert near El Adam";
 	map[4][5].strategicValue = 0;
 	map[4][5].road = true;
 	
-	map[4][4].description = "Desert near El Adam";
+	map[4][4].description = "the desert near El Adam";
 	map[4][4].strategicValue = 0;
 	map[4][4].road = true;
 	
-	map[4][3].description = "Road from Tobruk to El Adam";
+	map[4][3].description = "the road from Tobruk to El Adam";
 	map[4][3].strategicValue = 40;
 	map[4][3].road = true;
 	
-	map[6][3].description = "Road from Tobruk to Bardia";
+	map[6][3].description = "the road from Tobruk to Bardia";
 	map[6][3].strategicValue = 40;
 	map[6][3].road = true;
 	
-	map[7][3].description = "Road from Tobruk to Bardia";
+	map[7][3].description = "the road from Tobruk to Bardia";
 	map[7][3].strategicValue = 30;
 	map[7][3].road = true;
 	
-	map[8][3].description = "Road from Tobruk to Bardia";
+	map[8][3].description = "the road from Tobruk to Bardia";
 	map[8][3].strategicValue = 20;
 	map[8][3].road = true;
 	
@@ -171,17 +185,25 @@ for (var col = 0; col < 27; col += 1;)
 	map[9][3].road = true;
 	map[9][3].town = true;
 	
-	map[10][3].description = "Road from Tobruk to Bardia";
-	map[10][3].strategicValue = 30;
+	map[10][3].description = "the road from Tobruk to Bardia";
+	map[10][3].strategicValue = 20;
 	map[10][3].road = true;
 	
-	map[11][3].description = "Road from Tobruk to Bardia";
-	map[11][3].strategicValue = 30;
+	map[11][3].description = "the road from Tobruk to Bardia";
+	map[11][3].strategicValue = 20;
 	map[11][3].road = true;
 	
-	map[12][3].description = "Road from Tobruk to Bardia";
-	map[12][3].strategicValue = 30;
+	map[12][3].description = "the road from Tobruk to Bardia";
+	map[12][3].strategicValue = 20;
 	map[12][3].road = true;
+	
+	map[12][4].description = "the road west of Bardia";
+	map[12][4].strategicValue = 80;
+	map[12][4].road = true;
+	
+	map[11][4].description = "the road west of Bardia";
+	map[11][4].strategicValue = 100;
+	map[11][4].road = true;
 	
 	map[13][4].description = "Bardia";
 	map[13][4].strategicValue = 100;
@@ -189,78 +211,101 @@ for (var col = 0; col < 27; col += 1;)
 	map[13][4].town = true;
 	map[13][4].victoryPoints = 60;
 	
-	map[13][5].description = "Road south of Bardia";
-	map[13][5].strategicValue = 50;
+	map[13][5].description = "the road south of Bardia";
+	map[13][5].strategicValue = 60;
 	map[13][5].road = true;
 	
-	map[12][5].description = "Road south of Bardia";
-	map[12][5].strategicValue = 40;
+	map[12][5].description = "the road south of Bardia";
+	map[12][5].strategicValue = 50;
 	map[12][5].road = true;
 	
 	map[13][6].description = "Capuzzo";
-	map[13][6].strategicValue = 60;
+	map[13][6].strategicValue = 100;
 	map[13][6].road = true;
 	map[13][6].town = true;
 	map[13][6].ownedBy = Bloc.Axis;
 	
+	map[12][6].description = "West of Capuzzo";
+	map[12][6].strategicValue = 100;
+	map[12][6].road = false;
+	map[12][6].town = false;
+	map[12][6].ownedBy = Bloc.Axis;
+	
+	map[14][5].description = "Southwest of Capuzzo";
+	map[14][5].strategicValue = 100;
+	map[14][5].road = false;
+	map[14][5].town = false;
+	map[14][5].ownedBy = Bloc.Axis;
+	
 	map[14][6].description = "Sollum";
-	map[14][6].strategicValue = 60;
+	map[14][6].strategicValue = 100;
 	map[14][6].road = true;
 	map[14][6].town = true;
 	map[14][6].ownedBy = Bloc.Axis;
 	
-	map[13][7].description = "Road from Sollum to Buq Buq";
-	map[13][7].strategicValue = 30;
+	map[13][7].description = "the road from Sollum to Buq Buq";
+	map[13][7].strategicValue = 50;
 	map[13][7].road = true;
 	
-	map[14][7].description = "Road from Sollum to Buq Buq";
-	map[14][7].strategicValue = 20;
+	map[14][7].description = "the road from Sollum to Buq Buq";
+	map[14][7].strategicValue = 50;
 	map[14][7].road = true;
 	
-	map[15][7].description = "Road from Sollum to Buq Buq";
-	map[15][7].strategicValue = 20;
+	map[15][7].description = "the road from Sollum to Buq Buq";
+	map[15][7].strategicValue = 50;
 	map[15][7].road = true;
 	
-	map[16][7].description = "Road from Sollum to Buq Buq";
-	map[16][7].strategicValue = 20;
+	map[16][7].description = "the road from Sollum to Buq Buq";
+	map[16][7].strategicValue = 50;
 	map[16][7].road = true;
 	
 	map[17][7].description = "Buq Buq";
-	map[17][7].strategicValue = 40;
+	map[17][7].strategicValue = 70;
 	map[17][7].road = true;
 	map[17][7].town = true;
 	map[17][7].ownedBy = Bloc.Axis;
 	
-	map[18][7].description = "Road from Buq Buq to Sidi Barrani";
-	map[18][7].strategicValue = 20;
+	map[17][8].description = "the countryside southwest of Buq Buq";
+	map[17][8].strategicValue = 40;
+	map[17][8].ownedBy = Bloc.Axis;
+	
+	
+	map[18][7].description = "the road from Buq Buq to Sidi Barrani";
+	map[18][7].strategicValue = 60;
 	map[18][7].road = true;
 	map[18][7].ownedBy = Bloc.Axis;
 	
-	map[19][6].description = "Road from Buq Buq to Sidi Barrani";
-	map[19][6].strategicValue = 20;
+	map[18][6].description = "the beach northeast of Buq Buq";
+	map[18][6].strategicValue = 10;
+	map[18][6].road = false;
+	map[18][6].ownedBy = Bloc.Axis;
+	
+	map[19][6].description = "the road from Buq Buq to Sidi Barrani";
+	map[19][6].strategicValue = 70;
 	map[19][6].road = true;
 	map[19][6].ownedBy = Bloc.Axis;
 	
 	map[20][6].description = "Sidi Barrani";
-	map[20][6].strategicValue = 50;
+	map[20][6].strategicValue = 110;
 	map[20][6].road = true;
 	map[20][6].town = true;
 	map[20][6].victoryPoints = 40;
 	map[20][6].ownedBy = Bloc.Axis;
 	
-	map[21][6].description = "Road from Sidi Barrani east";
+	map[21][6].description = "the dusty road just east of Sidi Barrani";
 	map[21][6].strategicValue = 20;
 	map[21][6].road = true;
+	map[20][6].ownedBy = Bloc.Axis;
 	
-	map[22][6].description = "Road from Sidi Barrani east";
+	map[22][6].description = "the long and winding road east of Sidi Barrani";
 	map[22][6].strategicValue = 0;
 	map[22][6].road = true;
 	
-	map[22][7].description = "Road from Sidi Barrani east";
+	map[22][7].description = "the arid highway east of Sidi Barrani";
 	map[22][7].strategicValue = 0;
 	map[22][7].road = true;
 	
-	map[23][7].description = "Road from Sidi Barrani east";
+	map[23][7].description = "the road 25 miles east of Sidi Barrani";
 	map[23][7].strategicValue = 0;
 	map[23][7].road = true;
 	
@@ -346,6 +391,7 @@ Brit7Arm8Hus.movement = 6;
 Brit7Arm8Hus.combat = 6;
 Brit7Arm8Hus.size = Formation.Regiment;
 Brit7Arm8Hus.picture = sBr7Arm8Hus;
+Brit7Arm8Hus.victoryValue = 3;
 PutUnitInHex(18, 11, Brit7Arm8Hus);
 
 Brit7Arm6RTR = new LCU();
@@ -356,6 +402,7 @@ Brit7Arm6RTR.movement = 5;
 Brit7Arm6RTR.combat = 8;
 Brit7Arm6RTR.size = Formation.Batallion;
 Brit7Arm6RTR.picture = sBr6RTR;
+Brit7Arm6RTR.victoryValue = 4;
 PutUnitInHex(19, 10, Brit7Arm6RTR);
 
 Brit7RTR = new LCU();
@@ -376,6 +423,7 @@ Brit2RTR.movement = 7;
 Brit2RTR.combat = 3;
 Brit2RTR.size = Formation.Regiment;
 Brit2RTR.picture = sBr2RTR;
+Brit2RTR.victoryValue = 2;
 PutUnitInHex(17, 11, Brit2RTR);
 
 Brit1RTR = new LCU();
@@ -386,6 +434,7 @@ Brit1RTR.movement = 8;
 Brit1RTR.combat = 2;
 Brit1RTR.size = Formation.Regiment;
 Brit1RTR.picture = sBr1RTR;
+Brit1RTR.victoryValue = 2;
 PutUnitInHex(18, 10, Brit1RTR);
 
 Brit11Hus = new LCU();
@@ -396,6 +445,7 @@ Brit11Hus.movement = 6;
 Brit11Hus.combat = 2;
 Brit11Hus.size = Formation.Batallion;
 Brit11Hus.picture = sBr11Hus;
+Brit11Hus.victoryValue = 2;
 PutUnitInHex(20, 10, Brit11Hus);
 
 Ind5Bde = new LCU();
@@ -406,6 +456,7 @@ Ind5Bde.movement = 3;
 Ind5Bde.combat = 6;
 Ind5Bde.size = Formation.Batallion;
 Ind5Bde.picture = sInd5Bde;
+Ind5Bde.victoryValue = 3;
 PutUnitInHex(19, 8, Ind5Bde);
 
 Ind11Bde = new LCU();
@@ -416,6 +467,7 @@ Ind11Bde.movement = 3;
 Ind11Bde.combat = 6;
 Ind11Bde.size = Formation.Batallion;
 Ind11Bde.picture = sInd11Bde;
+Ind11Bde.victoryValue = 3;
 PutUnitInHex(20, 8, Ind5Bde);
 
 Ind7Bde = new LCU();
@@ -426,6 +478,7 @@ Ind7Bde.movement = 3;
 Ind7Bde.combat = 6;
 Ind7Bde.size = Formation.Batallion;
 Ind7Bde.picture = sInd7Bde;
+Ind7Bde.victoryValue = 3;
 PutUnitInHex(22, 6, Ind7Bde);
 
 Aus16Bde = new LCU();
@@ -436,6 +489,7 @@ Aus16Bde.movement = 3;
 Aus16Bde.combat = 6;
 Aus16Bde.size = Formation.Brigade;
 Aus16Bde.picture = sAus16Bde;
+Aus16Bde.victoryValue = 3;
 PutUnitInHex(22, 7, Aus16Bde);
 
 Aus17Bde = new LCU();
@@ -507,6 +561,7 @@ Italy23Inf.combat = 8;
 Italy23Inf.movement = 3;
 Italy23Inf.nationality = Nation.Italy;
 Italy23Inf.picture = sIt23InfDiv; 
+Italy23Inf.victoryValue = 4;
 PutUnitInHex(13, 5, Italy23Inf);
 
 Italy28Oct = new LCU();
@@ -525,6 +580,7 @@ ItalyCatanzaro.movement = 3;
 ItalyCatanzaro.side = Bloc.Axis;
 ItalyCatanzaro.nationality = Nation.Italy;
 ItalyCatanzaro.picture = sItCataznaro; 
+ItalyCatanzaro.victoryValue = 4;
 PutUnitInHex(17, 7, ItalyCatanzaro);
 
 ItalyJan3 = new LCU();
@@ -534,6 +590,7 @@ ItalyJan3.movement = 3;
 ItalyJan3.side = Bloc.Axis;
 ItalyJan3.nationality = Nation.Italy;
 ItalyJan3.picture = sItJan3; 
+ItalyJan3.victoryValue = 4;
 PutUnitInHex(20, 6, ItalyJan3);
 
 ItalyMar23 = new LCU();
@@ -543,6 +600,7 @@ ItalyMar23.movement = 3;
 ItalyMar23.side = Bloc.Axis;
 ItalyMar23.nationality = Nation.Italy;
 ItalyMar23.picture = sItMarch23; 
+ItalyMar23.victoryValue = 4;
 PutUnitInHex(14, 7, ItalyMar23);
 
 Italy1stLib = new LCU();
@@ -552,6 +610,7 @@ Italy1stLib.movement = 3;
 Italy1stLib.side = Bloc.Axis;
 Italy1stLib.nationality = Nation.Italy;
 Italy1stLib.picture = sIt1stLib; 
+Italy1stLib.victoryValue = 4;
 PutUnitInHex(21, 6, Italy1stLib);
 
 Italy2ndLib = new LCU();
@@ -562,6 +621,7 @@ Italy2ndLib.size = Formation.Division;
 Italy2ndLib.side = Bloc.Axis;
 Italy2ndLib.nationality = Nation.Italy;
 Italy2ndLib.picture = sIt2ndLib; 
+Italy2ndLib.victoryValue = 4;
 PutUnitInHex(20, 7, Italy2ndLib);
 
 ItalyGuardiaBardia = new LCU();
@@ -569,8 +629,9 @@ ItalyGuardiaBardia.designation = "Guardia Frontera Bardia";
 ItalyGuardiaBardia.side = Bloc.Axis;
 ItalyGuardiaBardia.size = Formation.Batallion;
 ItalyGuardiaBardia.combat = 2;
-ItalyGuardiaBardia.movement = 2;
+ItalyGuardiaBardia.movement = 0;
 ItalyGuardiaBardia.picture = sItGuardiaBardia;
+ItalyGuardiaBardia.victoryValue = 2;
 PutUnitInHex(13, 4, ItalyGuardiaBardia);
 
 ItalyGuardia = new LCU();
@@ -578,7 +639,7 @@ ItalyGuardia.designation = "Guardia Frontera Tobruk";
 ItalyGuardia.side = Bloc.Axis;
 ItalyGuardia.size = Formation.Batallion;
 ItalyGuardia.combat = 3;
-ItalyGuardia.movement = 1;
+ItalyGuardia.movement = 0;
 ItalyGuardia.picture = sItGuardiaTobruk;
 PutUnitInHex(5, 1, ItalyGuardia);
 
@@ -589,7 +650,7 @@ Italy3Med.size = Formation.Batallion;
 Italy3Med.branch = Type.Armor
 Italy3Med.combat = 3;
 Italy3Med.movement = 5;
-Italy3Med.picture = sItGuardiaTobruk;
+Italy3Med.picture = sIt3Med;
 PutUnitInHex(10, 3, Italy3Med);
 
 Italy21Light = new LCU();
@@ -600,6 +661,7 @@ Italy21Light.branch = Type.Armor;
 Italy21Light.combat = 1;
 Italy21Light.movement = 5;
 Italy21Light.picture = sIt21Light;
+Italy21Light.victoryValue = 2;
 PutUnitInHex(8, 3, Italy21Light);
 
 Italy60Light = new LCU();
@@ -610,6 +672,7 @@ Italy60Light.branch = Type.Armor;
 Italy60Light.combat = 1;
 Italy60Light.movement = 5;
 Italy60Light.picture = sIt60Light;
+Italy60Light.victoryValue = 2;
 PutUnitInHex(9, 3, Italy60Light);
 
 ItalyAresca = new LCU();

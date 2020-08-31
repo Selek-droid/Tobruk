@@ -72,7 +72,7 @@ function Garrison()
 				}
 			}
 			var orderedUnit = ds_list_find_value(enemiesOnMap, candidateIndex);
-			show_debug_message("Chosen garrison is " + orderedUnit.designation);
+			// show_debug_message("Chosen garrison is " + orderedUnit.designation);
 			FindPath([orderedUnit.coordX, orderedUnit.coordY], [6, 1]);
 			var	pathLength = ds_list_size(unitOrders);
 			if (pathLength > oMap.longestOrder)  { oMap.longestOrder = pathLength;}  // calc longest impulse
@@ -96,7 +96,8 @@ function FindThreats()  // Populates list of actualThreats with hexes containing
 	// Find vector from Tobruk to each enemy.  Then put a friendly on each vector, if possible.
 	ds_list_clear(possibleThreats);
 	ds_list_clear(actualThreats);
-	BreadthSearch(5, 1, 7);   // populates list of coords (arrays) in ds_list possibleThreats
+	
+	BreadthSearch(13, 4, 11);   // populates list of coords (arrays) in ds_list possibleThreats
 	var numberSearched = ds_list_size(possibleThreats);
 	for (var i = 0; i < numberSearched; i += 1;)
 	{
@@ -107,8 +108,8 @@ function FindThreats()  // Populates list of actualThreats with hexes containing
 			hex.combatStrength = hex.occupant.combat;
 			if hex.occupiedBy2 {hex.combatStrength += hex.occupant2.combat;}
 			hex.howFarAway = HowFar([6, 1],coords);  
-			show_debug_message("Allied threat at " + string(coords) + " contains " +
-				string(hex.combatStrength) + " combat points & is this far: " + string(hex.howFarAway));
+			//show_debug_message("Allied threat at " + string(coords) + " contains " +
+			//	string(hex.combatStrength) + " combat points & is this far: " + string(hex.howFarAway));
 			ds_list_add(actualThreats,hex);  // compile list of enemy-occupied hexes within range
 		}
 	}
@@ -125,20 +126,21 @@ function InfluenceMap()  // now breadth-search radiating from enemies, to genera
 		movement = 0;
 		var hex = ds_list_find_value(actualThreats, a);  // coords is [x,y] array == loc of Allied unit
 		var coords = [hex.colX, hex.rowY];   // coords is allied unit's spot
-		show_debug_message("Tac value should be zero: " + string(hex.tacticalValue));
+		// show_debug_message("Tac value should be zero: " + string(hex.tacticalValue));
 		// show_debug_message("Check combat val in this hex: " + string(hex.combatStrength));
 		if hex.occupied && hex.ownedBy == Bloc.Allied  // change to 'other side'
 		{
 			var movement = hex.occupant.movement;
-			var baseTacticalValue = 20 * hex.occupant.combat;
+			var baseTacticalValue = 10 * hex.occupant.combat;
 			hex.tacticalValue = baseTacticalValue;
+			// show_debug_message("Added " + hex.description + " tac val of " + string(hex.tacticalValue));
 			parentHex.add(hex);  // add to list of hexes to have .tacticalValue set to zero?
 		}
 		
 		else if hex.occupiedBy2 && hex.ownedBy == Bloc.Allied
 		{
 			var movement = max(hex.occupant.movement, hex.occupant2.movement);
-			baseTacticalValue = 20 * (hex.occupant.combat + hex.occupant2.combat);
+			baseTacticalValue = 10 * (hex.occupant.combat + hex.occupant2.combat);
 			hex.tacticalValue = baseTacticalValue;
 			parentHex.add(hex);
 		}
@@ -147,7 +149,7 @@ function InfluenceMap()  // now breadth-search radiating from enemies, to genera
 		
 		BreadthSearch(coords[0],coords[1], movement ); // populate possibleThreats again. Search in circle.
 		var numberSearched = ds_list_size(possibleThreats);  // # searched
-		show_debug_message("InfluenceMap searched " + string(numberSearched) + " hexes around " + string(coords));
+		// show_debug_message("InfluenceMap searched " + string(numberSearched) + " hexes around " + string(coords));
 		for (var b = 0; b < numberSearched; b += 1;)  // for each searched hex...
 		{
 			var nearbyCoords = ds_list_find_value(possibleThreats, b);  // nearbyCoords is [x,y] array; a searched hex
@@ -158,40 +160,40 @@ function InfluenceMap()  // now breadth-search radiating from enemies, to genera
 			{
 			nearbyHex.tacticalValue += baseTacticalValue * (1 / (2 * howFar));  // tacVal falls off
 			parentHex.add(nearbyHex);
-			show_debug_message(string(nearbyCoords) + " incremented by " + string(nearbyHex.tacticalValue));
+			// show_debug_message(string(nearbyCoords) + " incremented by " + string(nearbyHex.tacticalValue));
 			}
 		}
 	}
 
 }
 
-function Defend(coords)  // Creates influence map of nearby threats. Coords is hex we're defending.
-{
-	// assign higher tacticalValue to each hex between threat and hex(es) we're defending
-	// expect AI units to flow toward those higher-value hexes
-	// FindPath to each actualThreat, then assign higher values to each hex on path.
-	// Like making a move, only don't make a move -- just assign values.
+//function Defend(coords)  // Creates influence map of nearby threats. Coords is hex we're defending.
+//{
+//	// assign higher tacticalValue to each hex between threat and hex(es) we're defending
+//	// expect AI units to flow toward those higher-value hexes
+//	// FindPath to each actualThreat, then assign higher values to each hex on path.
+//	// Like making a move, only don't make a move -- just assign values.
 	
-	// show_debug_message("Starting Defend function");
-	var numberOfThreats = ds_list_size(actualThreats);
-	// show_debug_message("Number of threats: " + string(numberOfThreats));
-	for (var a = 0; a < numberOfThreats; a += 1;)
-	{
-		var threat = ds_list_find_value(actualThreats, a);
-		var threatCoords = [threat.colX, threat.rowY];
-		FindPath(coords,threatCoords); // puts several hex-coord-arrays into unitOrders
-		var	pathLength = ds_list_size(unitOrders);  // count number of hexes in path from D to threat
-		// show_debug_message("distance to threat " + string(threat.description) + " is: " + string(pathLength));
-		for (var b = 0; b < pathLength ; b += 1;)  // increase tac value of each such hex - influence map
-		{
-			var influence = 10 * (pathLength - b);
-			var danger = ds_list_find_value(unitOrders, b); 
-			var hex = oMap.map[danger[0]][danger[1]];
-			hex.tacticalValue += influence * hex.combatStrength;
-			// show_debug_message(hex.description + " has tacVal of " + string(hex.tacticalValue));
-		}
-	}
-}
+//	// show_debug_message("Starting Defend function");
+//	var numberOfThreats = ds_list_size(actualThreats);
+//	// show_debug_message("Number of threats: " + string(numberOfThreats));
+//	for (var a = 0; a < numberOfThreats; a += 1;)
+//	{
+//		var threat = ds_list_find_value(actualThreats, a);
+//		var threatCoords = [threat.colX, threat.rowY];
+//		FindPath(coords,threatCoords); // puts several hex-coord-arrays into unitOrders
+//		var	pathLength = ds_list_size(unitOrders);  // count number of hexes in path from D to threat
+//		// show_debug_message("distance to threat " + string(threat.description) + " is: " + string(pathLength));
+//		for (var b = 0; b < pathLength ; b += 1;)  // increase tac value of each such hex - influence map
+//		{
+//			var influence = 10 * (pathLength - b);
+//			var danger = ds_list_find_value(unitOrders, b); 
+//			var hex = oMap.map[danger[0]][danger[1]];
+//			hex.tacticalValue += influence * hex.combatStrength;
+//			// show_debug_message(hex.description + " has tacVal of " + string(hex.tacticalValue));
+//		}
+//	}
+//}
 
 
 
@@ -210,24 +212,33 @@ function ChooseMove(coords)
 		
 		var targetHex = oMap.map[proposedMove[0]][proposedMove[1]];
 		
-		var lengthOfMove = HowFar(coords,proposedMove);
+		// var lengthOfMove = HowFar(coords,proposedMove);
+		if targetHex.occupied && targetHex.occupant.side == Bloc.Allied 
+			&& targetHex.occupant.combat == 0  && currentHex.occupant.combat > 0
+		{
+			bestMove = proposedMove;
+			ds_list_clear(oMap.possibleMoves);
+			return bestMove;
+		}
 		
-		var valueOfStart = currentHex.strategicValue + currentHex.tacticalValue;
-		var combatDifferential = currentHex.combatStrength - targetHex.combatStrength;
+		var valueOfStart = currentHex.strategicValue; // + currentHex.tacticalValue;
+		var combatDifferential = 5 * (currentHex.combatStrength - targetHex.combatStrength);
 		var valueOfEnd = floor ( combatDifferential +
-			(targetHex.strategicValue + targetHex.tacticalValue - (2 * lengthOfMove)));
+			(targetHex.strategicValue ) ); // - (2 * lengthOfMove)));
+			
+		
 		
 		// show_debug_message("Value of " + currentHex.description + " is: " + string(valueOfEnd));
 		// show_debug_message("Value of " + targetHex.description + " is: " + string(valueOfEnd));
 		
-		if !targetHex.garrisoned 
-		{	
-			if (valueOfEnd - valueOfStart) > maxValue
-			{
-				maxValue = valueOfEnd - valueOfStart;
-				bestMove = proposedMove;
-			}
+		//if !targetHex.garrisoned 
+		//{	
+		if (valueOfEnd - valueOfStart) > maxValue
+		{
+			maxValue = valueOfEnd - valueOfStart;
+			bestMove = proposedMove;
 		}
+		//}
 	}
 	ds_list_clear(oMap.possibleMoves);
 	return bestMove;
