@@ -41,10 +41,10 @@ function PixelsToPointyHex(pointX, pointY)
 	var cubeQ = cubeCoords[0];
 	var cubeR = cubeCoords[1];
 	var cubeS = cubeCoords[1];
-	show_debug_message("Cubes are Q: " + string(cubeQ) + " , r: " + string(cubeR) + " , s: " + string(cubeS));
+	// show_debug_message("Cubes are Q: " + string(cubeQ) + " , r: " + string(cubeR) + " , s: " + string(cubeS));
 	offsetCoords = CubeToOddr(cubeQ, cubeR, cubeS); // converts 3 cube coords to 2 offset
 	offsetCoords[0] += 1;
-	show_debug_message("Offset coords are " + string(offsetCoords));
+	// show_debug_message("Offset coords are " + string(offsetCoords));
 	
 	return offsetCoords;  // an array of 2 coordinates
 }

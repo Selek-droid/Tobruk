@@ -11,9 +11,9 @@ function MoveUnitToHex(fromX, fromY, toX, toY, unit)
 	if targetHex.occupiedBy2 && (targetHex.occupant.side == unit.side) // if full, don't move.
 	{
 		unit.orders = 0;
-		show_debug_message(unit.designation + " thinks target hex " + string(toX) + " , " 
-			+ string(toY) + "is full, so stays in hex " + string(unit.coordX) + " , " + 
-			string(unit.coordY));
+		//show_debug_message(unit.designation + " thinks target hex " + string(toX) + " , " 
+		//	+ string(toY) + "is full, so stays in hex " + string(unit.coordX) + " , " + 
+		//	string(unit.coordY));
 
 		return false;
 	}
@@ -58,7 +58,8 @@ function MoveUnitToHex(fromX, fromY, toX, toY, unit)
 			{
 				if keyboard_check_pressed(vk_anykey) 
 				{
-					oMap.combatMessage = "Attack by " + unit.designation + " was inconclusive.";
+					oMap.combatMessage = "Attack by " + unit.designation + " was inconclusive";
+					oUIBar.flavorMessage = "at " + targetHex.description + ".";
 					return false;
 				}
 				break;
@@ -66,18 +67,29 @@ function MoveUnitToHex(fromX, fromY, toX, toY, unit)
 			
 			case Outcome.DefenderStepLoss:
 			{
+				if targetHex.occupant.side == Bloc.Allied
+					{
+						oMap.axisVPs += targetHex.occupant.victoryValue;
+					}
+					else 
+					{
+						oMap.alliedVPs += targetHex.occupant.victoryValue;
+					}
 				if keyboard_check_pressed(vk_anykey) 
 				{
-					oMap.combatMessage = (unit.designation + " hits " + targetHex.occupant.designation +
-					"at " + string(toX) + " , " + string(toY));
+					oUIBar.eventsMessage = (unit.designation + " hits " + targetHex.occupant.designation);
+					oUIBar.flavorMessage = "at " + targetHex.description + ".";
 				}
 				
 				targetHex.occupant.steps -= 1;
 				
 				if targetHex.occupant.steps > 0   // still alive, so exit
 				{
-					targetHex.occupant.combat = targetHex.occupant.combat / 2;
+					
+					
+					targetHex.occupant.combat = floor(targetHex.occupant.combat / 2);
 					targetHex.occupant.orders = 0;
+					
 					return true;
 				}
 				
@@ -113,13 +125,23 @@ function MoveUnitToHex(fromX, fromY, toX, toY, unit)
 			{
 				unit.steps -= 1;
 				
+				if unit.side == Bloc.Allied
+					{
+						oMap.axisVPs += unit.victoryValue;
+					}
+					else 
+					{
+						oMap.alliedVPs += unit.victoryValue;
+					}
+				
 				if unit.steps > 0   // still alive, so exit
 				{
 					unit.combat = floor(unit.combat / 2);
 					unit.orders = 0;
 					if keyboard_check_pressed(vk_space) 
 					{
-						oMap.combatMessage = (unit.designation + " damaged by " + targetHex.occupant.designation );
+						oUIBar.eventsMessage = (unit.designation + " damaged by " + targetHex.occupant.designation );
+						oUIBar.flavorMessage = "at " + targetHex.description + ".";
 					}
 					return false;
 				}
@@ -130,7 +152,8 @@ function MoveUnitToHex(fromX, fromY, toX, toY, unit)
 					unit.onMap = false;
 					if keyboard_check_pressed(vk_space) 
 					{
-						oMap.combatOdds = unit.designation + " destroyed while amking failed assault";
+						oUIBar.eventsMessage = unit.designation + " destroyed while amking failed assault";
+						oUIBar.flavorMessage = "at " + targetHex.description;
 					}
 					
 					CleanDepartedHex(departedHex, true);
@@ -222,18 +245,22 @@ function Battle(attacker, defender, attackerFromX, attackerFromY, battleX, battl
 		else if odds < 6 && odds >= 0
 		{
 			var d10Roll = irandom(10);
-			oMap.combatOdds = ( "Die roll: " + string(d10Roll));
+			// oMap.combatOdds = ( "Die roll: " + string(d10Roll));
 			if d10Roll >= 9
 			{
 				attacker.orders = 0;
 				defender.orders = 0;
-				oUIBar.combatMessage = attacker.designation + "takes a step loss after failed attack";
+				oUIBar.eventsMessage = attacker.designation + "takes a step loss after failed attack";
+				oUIBar.flavorMessage = " at " + battleHex.description + ".";
+				
 			}
 			else 
 			{
 				attacker.orders = 0;
 				defender.orders = 0;
-				oUIBar.combatMessage = "Combat is inconclusive";
+				oUIBar.eventsMessage = "Combat is inconclusive"
+				oUIBar.flavorMessage = " at " + battleHex.description + ".";
+				
 				return Outcome.Inconclusive;
 			}
 		}
@@ -242,10 +269,11 @@ function Battle(attacker, defender, attackerFromX, attackerFromY, battleX, battl
 	if (attackPower >= defensePower )
 	{
 		var dieRoll = irandom(100);
-		oMap.combatOdds = ("d100 roll: " + string(dieRoll));
+		// oMap.combatOdds = ("d100 roll: " + string(dieRoll));
 		if dieRoll < ((2 * odds) - 10 )  // remember, odds is 10 times the odds, so 1:1 is 10, 3:1 is 30.
 		{
-			oMap.combatMessage = (attacker.designation + " inflicts a hit on " + defender.designation);
+			oUIBar.eventsMessage = (attacker.designation + " inflicts a hit on " + defender.designation);
+			oUIBar.flavorMessage = " at " + battleHex.description + ".";
 			defender.orders = 0;
 			attacker.orders = 0;
 			return Outcome.DefenderStepLoss;
@@ -254,6 +282,8 @@ function Battle(attacker, defender, attackerFromX, attackerFromY, battleX, battl
 		{
 			attacker.orders = 0;
 			defender.orders = 0;
+			oUIBar.eventsMessage = (attacker.designation + " fails to damage " + defender.designation);
+			oUIBar.flavorMessage = " at " + battleHex.description + ".";
 			return Outcome.Inconclusive;
 		}
 	}

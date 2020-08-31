@@ -126,7 +126,7 @@ function InfluenceMap()  // now breadth-search radiating from enemies, to genera
 		var hex = ds_list_find_value(actualThreats, a);  // coords is [x,y] array == loc of Allied unit
 		var coords = [hex.colX, hex.rowY];   // coords is allied unit's spot
 		show_debug_message("Tac value should be zero: " + string(hex.tacticalValue));
-		show_debug_message("Check combat val in this hex: " + string(hex.combatStrength));
+		// show_debug_message("Check combat val in this hex: " + string(hex.combatStrength));
 		if hex.occupied && hex.ownedBy == Bloc.Allied  // change to 'other side'
 		{
 			var movement = hex.occupant.movement;
@@ -172,16 +172,16 @@ function Defend(coords)  // Creates influence map of nearby threats. Coords is h
 	// FindPath to each actualThreat, then assign higher values to each hex on path.
 	// Like making a move, only don't make a move -- just assign values.
 	
-	show_debug_message("Starting Defend function");
+	// show_debug_message("Starting Defend function");
 	var numberOfThreats = ds_list_size(actualThreats);
-	show_debug_message("Number of threats: " + string(numberOfThreats));
+	// show_debug_message("Number of threats: " + string(numberOfThreats));
 	for (var a = 0; a < numberOfThreats; a += 1;)
 	{
 		var threat = ds_list_find_value(actualThreats, a);
 		var threatCoords = [threat.colX, threat.rowY];
 		FindPath(coords,threatCoords); // puts several hex-coord-arrays into unitOrders
 		var	pathLength = ds_list_size(unitOrders);  // count number of hexes in path from D to threat
-		show_debug_message("distance to threat " + string(threat.description) + " is: " + string(pathLength));
+		// show_debug_message("distance to threat " + string(threat.description) + " is: " + string(pathLength));
 		for (var b = 0; b < pathLength ; b += 1;)  // increase tac value of each such hex - influence map
 		{
 			var influence = 10 * (pathLength - b);
@@ -206,7 +206,7 @@ function ChooseMove(coords)
 	{
 		var proposedMove = ds_list_find_value(oMap.possibleMoves, i);
 		
-		show_debug_message("ChooseMove finds this entry in poss moves: " + string(proposedMove));
+		// show_debug_message("ChooseMove finds this entry in poss moves: " + string(proposedMove));
 		
 		var targetHex = oMap.map[proposedMove[0]][proposedMove[1]];
 		

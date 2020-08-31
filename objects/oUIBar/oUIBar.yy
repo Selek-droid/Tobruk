@@ -1,7 +1,7 @@
 {
   "spriteId": {
-    "name": "sUIBar",
-    "path": "sprites/sUIBar/sUIBar.yy",
+    "name": "sUIBarv5",
+    "path": "sprites/sUIBarv5/sUIBarv5.yy",
   },
   "solid": false,
   "visible": true,

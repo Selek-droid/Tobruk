@@ -4,8 +4,16 @@
 
 if oGame.state == "Player Turn"
 {
+	if turn == 20 && (oGame.over == false)
+	{
+		DeclareVictory();
+	}
+	
 	if mouse_check_button_pressed(mb_left) && (! hexAlreadySelected)
 	{
+		oUIBar.eventsMessage = "Once you finish ordering units, hit ENTER.";
+		oUIBar.flavorMessage = "Then give the AI a moment to think! Then hit SPACE.";
+		
 		needPath = false;  // reset path highlighting after click
 		ds_list_clear(highlightedHexes); 
 		var coords;
@@ -103,15 +111,28 @@ if oGame.state == "Player Turn"
 	
 	if keyboard_check_pressed(vk_enter)  // END TURN!
 	{
-		oGame.state = "Opponent Turn";
 		show_debug_message("End Player Turn");
-		oMap.combatMessage = "Preparing to execute orders; please wait";
+
+		waitForAI = true;
+		// oMap.combatMessage = "Executing orders; PLEASE WAIT.";
+		show_debug_message("WaitForAI var is " + string(waitForAI));
 		keyboard_clear(vk_enter);
 		needPath = false;
+		// oGame.state = "Wait Popup";
+		oGame.state = "Opponent Turn";
 	}
 }
 
 #endregion 
+
+//if oGame.state == "Wait Popup"
+//{
+//	waitForAI = true;
+//	if keyboard_check_pressed(vk_space)
+//	{
+//		oGame.state = "Opponent Turn";
+//	}
+//}
 
 if oGame.state == "Opponent Turn"
 {
@@ -134,11 +155,11 @@ if oGame.state == "Opponent Turn"
 			var startX = enemyUnit.coordX;
 			var startY = enemyUnit.coordY;
 			var coords = [startX, startY];
-			show_debug_message(enemyUnit.designation + "has mvmt of " + string(enemyUnit.movement));
+			// show_debug_message(enemyUnit.designation + "has mvmt of " + string(enemyUnit.movement));
 			BreadthSearch(startX, startY, enemyUnit.movement);
 		
 			chosenMove = ChooseMove(coords);  // must return an array/ can this be a var?
-			show_debug_message(enemyUnit.designation + " has chosen: " + string(chosenMove));
+			// show_debug_message(enemyUnit.designation + " has chosen: " + string(chosenMove));
 			FindPath(coords, chosenMove);
 			pathLength = ds_list_size(unitOrders);
 			if (pathLength > longestOrder)  { longestOrder = pathLength;}  // calc longest impulse
@@ -146,7 +167,7 @@ if oGame.state == "Opponent Turn"
 			{
 				enemyUnit.orders[i] = ds_list_find_value(unitOrders,i);
 			}
-			show_debug_message(enemyUnit.designation + " init orders: " + string(enemyUnit.orders));
+			// show_debug_message(enemyUnit.designation + " init orders: " + string(enemyUnit.orders));
 			ds_list_clear(unitOrders);  // clear orders for next unit
 			ds_list_add(whoHasOrders,enemyUnit);  // but keep this for WEGO unit-with-orders count
 		}
@@ -154,8 +175,8 @@ if oGame.state == "Opponent Turn"
 	
 	ds_list_clear(possibleMoves);
 	parentHex.setAll("tacticalValue", 0);
-	oMap.combatMessage = "Press spacebar to begin first impulse.";
-	
+	// oMap.combatMessage = "Press spacebar to proceed to next impulse.";
+	waitForAI = false;
 	firstImpulse = true;
 	oGame.state = "WEGO";
 	
@@ -170,20 +191,29 @@ if oGame.state == "WEGO"
 	// For now, will use list of units with orders, created in orders phase.
 	// Moves are simultaneous!  We'll do per-hex for now?
 	
-
+	
 	var numberWithOrders = ds_list_size(whoHasOrders);
 	if ! numberWithOrders
 	{
+		waitForAI = false;
 		impulse = 0;
 		longestOrder = 0;
 		ds_list_clear(whoHasOrders);
 		needPath = false;
+		firstImpulse = false;
 		// show_debug_message("No orders; ending WEGO, starting new Player TUrn");
 		oGame.state = "Player Turn";
 	}
 	// show_debug_message("# of units ordered: " + string(numberWithOrders));
-	if firstImpulse || keyboard_check_pressed(vk_space) || keyboard_check_pressed(vk_right)
+	
+	if firstImpulse
 	{
+		oMap.combatMessage = "To see the first event, press spacebar.";
+	}
+	
+	if firstImpulse || keyboard_check_pressed(vk_space) // || keyboard_check_pressed(vk_right)
+	{
+		waitForAI = false;
 		if (numberWithOrders > 0) && (impulse < 8)
 		{
 			
@@ -192,12 +222,12 @@ if oGame.state == "WEGO"
 				var orderedUnit = ds_list_find_value(whoHasOrders, i);
 				
 				var moveLength = array_length(orderedUnit.orders); 
-				show_debug_message(orderedUnit.designation + " orders are " + string(orderedUnit.orders));
+				// show_debug_message(orderedUnit.designation + " orders are " + string(orderedUnit.orders));
 				
 				if moveLength - impulse > 0
 				{
 					var nextHex = orderedUnit.orders[moveLength - 1 - impulse]; 
-					show_debug_message(orderedUnit.designation + " ordered to " + string(nextHex));
+					// show_debug_message(orderedUnit.designation + " ordered to " + string(nextHex));
 					if is_array(nextHex)  // in case no orders, I guess? Just do nothing?
 					{
 						var buffedHex = oMap.map[nextHex[0]][nextHex[1]];
@@ -218,6 +248,10 @@ if oGame.state == "WEGO"
 			}
 			impulse += 1;
 			firstImpulse = false;
+		
+			
+			oMap.combatMessage = "Press spacebar to see next impulse or combat.";
+	
 		}
 	}
 	
@@ -240,6 +274,7 @@ if oGame.state == "WEGO"
 		keyboard_clear(vk_space);
 		show_debug_message("Ending WEGO, starting player turn");
 		turn += 1;
+		DisplayDate(turn);
 		oMap.combatMessage = "Left click to order units. Press Enter to end your turn.";
 		oGame.state = "Player Turn";
 	}

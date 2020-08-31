@@ -35,6 +35,7 @@ hexAlreadySelected = false;
 spriteAlpha = 1;
 
 turn = 1;
+waitForAI = false;
 impulse = 0;
 combatMessage = "Awaiting orders";
 combatOdds = "No combat to report";
@@ -76,16 +77,50 @@ for (var col = 0; col < 27; col += 1;)
 	map[1][0].strategicValue = 15;
 	map[1][0].road = true;
 	map[1][0].roadExit = RoadExit.SE
+	map[1][0].town = true;
+	
+	map[1][1].description = "Road from Tobruk to Gazala";
+	map[1][1].strategicValue = 15;
+	map[1][1].road = true;
 	
 	map[1][2].description = "Alem Hamza";
-	map[1][2].strategicValue = 10;
+	map[1][2].strategicValue = 30;
+	map[1][2].town = true;
 	
 	map[2][1].description = "Road from Gazala to Tobruk";
 	map[2][1].strategicValue = 10;
 	map[2][1].road = true;
 	
+	map[2][6].description = "Bir Hasheim";
+	map[2][6].strategicValue = 40;
+	map[2][6].town = true;
+	
+	map[6][7].description = "Bir el-Ghubi";
+	map[6][7].strategicValue = 60;
+	map[6][7].town = true;
+	
+	map[7][12].description = "El Cuasc";
+	map[7][12].strategicValue = 10;
+	map[7][12].town = true;
+	
+	map[12][10].description = "Gasr al Abid";
+	map[12][10].strategicValue = 30;
+	map[12][10].town = true;
+	
+	map[14][13].description = "Fort Maddalena";
+	map[14][13].strategicValue = 0;
+	map[14][13].town = true;
+	
+	map[19][13].description = "Bir Khamsa";
+	map[19][13].strategicValue = 0;
+	map[19][13].town = true;
+	
+	map[9][8].description = "Gabr Saleh";
+	map[9][8].strategicValue = 50;
+	map[9][8].town = true;
+	
 	map[3][1].description = "Road west of Tobruk";
-	map[3][1].strategicValue = 15;
+	map[3][1].strategicValue = 20;
 	map[3][1].road = true;
 	
 	map[4][1].description = "Road immediately west of Tobruk";
@@ -93,20 +128,206 @@ for (var col = 0; col < 27; col += 1;)
 	map[4][1].road = true;
 	
 	map[5][1].description = "Tobruk";
-	map[5][1].strategicValue = 300;
+	map[5][1].strategicValue = 200;
 	map[5][1].road = true;
+	map[5][1].town = true;
+	map[5][1].victoryPoints = 100;
 	
-	map[5][2].description = "Road south of Tobruk";
+	map[5][2].description = "Road just south of Tobruk";
 	map[5][2].strategicValue = 100;
 	map[5][2].road = true;
 	
-	map[2][2].description = "Just southeast of Benghazi";
-	// map[2][2].strategicValue = 30;
-	map[2][2].ownedBy = Bloc.Axis;
+	map[5][3].description = "El Adam";
+	map[5][3].strategicValue = 50;
+	map[5][3].road = true;
+	map[5][3].town = true;
 	
-	map[1][2].description = "Just southwest of Benghazi";
-	// map[1][2].strategicValue = 30;
-	map[1][2].ownedBy = Bloc.Axis;
+	map[4][5].description = "Desert near El Adam";
+	map[4][5].strategicValue = 0;
+	map[4][5].road = true;
+	
+	map[4][4].description = "Desert near El Adam";
+	map[4][4].strategicValue = 0;
+	map[4][4].road = true;
+	
+	map[4][3].description = "Road from Tobruk to El Adam";
+	map[4][3].strategicValue = 40;
+	map[4][3].road = true;
+	
+	map[6][3].description = "Road from Tobruk to Bardia";
+	map[6][3].strategicValue = 40;
+	map[6][3].road = true;
+	
+	map[7][3].description = "Road from Tobruk to Bardia";
+	map[7][3].strategicValue = 30;
+	map[7][3].road = true;
+	
+	map[8][3].description = "Road from Tobruk to Bardia";
+	map[8][3].strategicValue = 20;
+	map[8][3].road = true;
+	
+	map[9][3].description = "Gambut";
+	map[9][3].strategicValue = 60;
+	map[9][3].road = true;
+	map[9][3].town = true;
+	
+	map[10][3].description = "Road from Tobruk to Bardia";
+	map[10][3].strategicValue = 30;
+	map[10][3].road = true;
+	
+	map[11][3].description = "Road from Tobruk to Bardia";
+	map[11][3].strategicValue = 30;
+	map[11][3].road = true;
+	
+	map[12][3].description = "Road from Tobruk to Bardia";
+	map[12][3].strategicValue = 30;
+	map[12][3].road = true;
+	
+	map[13][4].description = "Bardia";
+	map[13][4].strategicValue = 100;
+	map[13][4].road = true;
+	map[13][4].town = true;
+	map[13][4].victoryPoints = 60;
+	
+	map[13][5].description = "Road south of Bardia";
+	map[13][5].strategicValue = 50;
+	map[13][5].road = true;
+	
+	map[12][5].description = "Road south of Bardia";
+	map[12][5].strategicValue = 40;
+	map[12][5].road = true;
+	
+	map[13][6].description = "Capuzzo";
+	map[13][6].strategicValue = 60;
+	map[13][6].road = true;
+	map[13][6].town = true;
+	map[13][6].ownedBy = Bloc.Axis;
+	
+	map[14][6].description = "Sollum";
+	map[14][6].strategicValue = 60;
+	map[14][6].road = true;
+	map[14][6].town = true;
+	map[14][6].ownedBy = Bloc.Axis;
+	
+	map[13][7].description = "Road from Sollum to Buq Buq";
+	map[13][7].strategicValue = 30;
+	map[13][7].road = true;
+	
+	map[14][7].description = "Road from Sollum to Buq Buq";
+	map[14][7].strategicValue = 20;
+	map[14][7].road = true;
+	
+	map[15][7].description = "Road from Sollum to Buq Buq";
+	map[15][7].strategicValue = 20;
+	map[15][7].road = true;
+	
+	map[16][7].description = "Road from Sollum to Buq Buq";
+	map[16][7].strategicValue = 20;
+	map[16][7].road = true;
+	
+	map[17][7].description = "Buq Buq";
+	map[17][7].strategicValue = 40;
+	map[17][7].road = true;
+	map[17][7].town = true;
+	map[17][7].ownedBy = Bloc.Axis;
+	
+	map[18][7].description = "Road from Buq Buq to Sidi Barrani";
+	map[18][7].strategicValue = 20;
+	map[18][7].road = true;
+	map[18][7].ownedBy = Bloc.Axis;
+	
+	map[19][6].description = "Road from Buq Buq to Sidi Barrani";
+	map[19][6].strategicValue = 20;
+	map[19][6].road = true;
+	map[19][6].ownedBy = Bloc.Axis;
+	
+	map[20][6].description = "Sidi Barrani";
+	map[20][6].strategicValue = 50;
+	map[20][6].road = true;
+	map[20][6].town = true;
+	map[20][6].victoryPoints = 40;
+	map[20][6].ownedBy = Bloc.Axis;
+	
+	map[21][6].description = "Road from Sidi Barrani east";
+	map[21][6].strategicValue = 20;
+	map[21][6].road = true;
+	
+	map[22][6].description = "Road from Sidi Barrani east";
+	map[22][6].strategicValue = 0;
+	map[22][6].road = true;
+	
+	map[22][7].description = "Road from Sidi Barrani east";
+	map[22][7].strategicValue = 0;
+	map[22][7].road = true;
+	
+	map[23][7].description = "Road from Sidi Barrani east";
+	map[23][7].strategicValue = 0;
+	map[23][7].road = true;
+	
+	map[24][7].description = "Road from Sidi Barrani east";
+	map[24][7].strategicValue = 0;
+	map[24][7].road = true;
+	
+	map[25][7].description = "Road from Sidi Barrani east";
+	map[25][7].strategicValue = 0;
+	map[25][7].road = true;
+	
+	map[20][7].description = "Road south from Sidi Barrani";
+	map[20][7].strategicValue = 0;
+	map[20][7].road = true;
+	
+	map[20][8].description = "Road south from Sidi Barrani";
+	map[20][8].strategicValue = 0;
+	map[20][8].road = true;
+	
+	map[19][8].description = "Desert south of Sidi Barrani";
+	map[19][8].strategicValue = 0;
+	
+	map[19][9].description = "Bir Enba";
+	map[19][9].strategicValue = 0;
+	map[19][9].road = true;
+	map[19][9].town = true;
+	
+	map[18][9].description = "Road south from Sidi Barrani";
+	map[18][9].strategicValue = 0;
+	map[18][9].road = true;
+	
+	map[19][10].description = "Road west of Bir Enba";
+	map[19][10].strategicValue = 0;
+	map[19][10].road = true;
+	
+	map[18][10].description = "Road west of Bir Enba";
+	map[18][10].strategicValue = 0;
+	map[18][10].road = true;
+	
+	map[17][10].description = "el Hamra";
+	map[17][10].strategicValue = 0;
+	map[17][10].road = true;
+	map[17][10].town = true;
+	
+	map[16][9].description = "Road to el Hamra";
+	map[16][9].strategicValue = 0;
+	map[16][9].road = true;
+	
+	map[15][9].description = "Road to el Hamra";
+	map[15][9].strategicValue = 5;
+	map[15][9].road = true;
+	
+	map[15][8].description = "Road south of Sollum";
+	map[15][8].strategicValue = 6;
+	map[15][8].road = true;
+	
+	map[14][8].description = "Road south of Sollum";
+	map[14][8].strategicValue = 6;
+	map[14][8].road = true;
+	
+	
+	
+	
+
+	
+	
+	
 	
 	
 	

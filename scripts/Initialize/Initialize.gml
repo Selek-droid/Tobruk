@@ -15,7 +15,7 @@ function Hex(col, row) constructor
 	terrain = Terrain.Clear 
 	road = false;
 	roadExit = RoadExit.NoRoad;
-	city = Urban.NotUrban;
+	town = false;
 	airfield = false;
 	port = false;
 	defense = 1;
@@ -39,7 +39,7 @@ function LCU() constructor
 	branch = Type.Infantry;
 	size = Formation.Division;
 	movement = 3;
-	combat = 3;
+	combat = 6;
 	steps = 2;
 	orders[0] = 0;
 	ordersSet = false;
@@ -50,6 +50,7 @@ function LCU() constructor
 	coordX = 0;
 	coordY = 0;
 	topUnit = true;
+	victoryValue = 3;
 }
 
 function HexContainer() constructor 

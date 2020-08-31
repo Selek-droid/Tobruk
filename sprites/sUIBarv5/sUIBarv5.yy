@@ -10,12 +10,12 @@
   "bbox_left": 0,
   "bbox_right": 1919,
   "bbox_top": 0,
-  "bbox_bottom": 49,
+  "bbox_bottom": 119,
   "HTile": false,
   "VTile": false,
   "For3D": false,
   "width": 1920,
-  "height": 50,
+  "height": 120,
   "textureGroupId": {
     "name": "Default",
     "path": "texturegroups/Default",
@@ -24,12 +24,12 @@
   "gridX": 0,
   "gridY": 0,
   "frames": [
-    {"compositeImage":{"FrameId":{"name":"106b08ae-0fdd-47ce-9350-8cb1be6be615","path":"sprites/sUIBar/sUIBar.yy",},"LayerId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},"images":[
-        {"FrameId":{"name":"106b08ae-0fdd-47ce-9350-8cb1be6be615","path":"sprites/sUIBar/sUIBar.yy",},"LayerId":{"name":"2b7c7241-cf4f-41da-a5b6-c140193952f3","path":"sprites/sUIBar/sUIBar.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},
-      ],"parent":{"name":"sUIBar","path":"sprites/sUIBar/sUIBar.yy",},"resourceVersion":"1.0","name":"106b08ae-0fdd-47ce-9350-8cb1be6be615","tags":[],"resourceType":"GMSpriteFrame",},
+    {"compositeImage":{"FrameId":{"name":"4987ce18-c034-4923-b727-d845bdfcc39d","path":"sprites/sUIBarv5/sUIBarv5.yy",},"LayerId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},"images":[
+        {"FrameId":{"name":"4987ce18-c034-4923-b727-d845bdfcc39d","path":"sprites/sUIBarv5/sUIBarv5.yy",},"LayerId":{"name":"114634ff-3c7e-4e8f-995c-8c8d09fb1cf6","path":"sprites/sUIBarv5/sUIBarv5.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},
+      ],"parent":{"name":"sUIBarv5","path":"sprites/sUIBarv5/sUIBarv5.yy",},"resourceVersion":"1.0","name":"4987ce18-c034-4923-b727-d845bdfcc39d","tags":[],"resourceType":"GMSpriteFrame",},
   ],
   "sequence": {
-    "spriteId": {"name":"sUIBar","path":"sprites/sUIBar/sUIBar.yy",},
+    "spriteId": {"name":"sUIBarv5","path":"sprites/sUIBarv5/sUIBarv5.yy",},
     "timeUnits": 1,
     "playback": 1,
     "playbackSpeed": 30.0,
@@ -41,7 +41,7 @@
     "moments": {"Keyframes":[],"resourceVersion":"1.0","resourceType":"KeyframeStore<MomentsEventKeyframe>",},
     "tracks": [
       {"name":"frames","spriteId":null,"keyframes":{"Keyframes":[
-            {"id":"6f7702f1-2127-42bc-ad82-5e95b120c2bd","Key":0.0,"Length":1.0,"Stretch":false,"Disabled":false,"IsCreationKey":false,"Channels":{"0":{"Id":{"name":"106b08ae-0fdd-47ce-9350-8cb1be6be615","path":"sprites/sUIBar/sUIBar.yy",},"resourceVersion":"1.0","resourceType":"SpriteFrameKeyframe",},},"resourceVersion":"1.0","resourceType":"Keyframe<SpriteFrameKeyframe>",},
+            {"id":"4bd09f59-2819-43bb-8278-2e4cb3f4a7de","Key":0.0,"Length":1.0,"Stretch":false,"Disabled":false,"IsCreationKey":false,"Channels":{"0":{"Id":{"name":"4987ce18-c034-4923-b727-d845bdfcc39d","path":"sprites/sUIBarv5/sUIBarv5.yy",},"resourceVersion":"1.0","resourceType":"SpriteFrameKeyframe",},},"resourceVersion":"1.0","resourceType":"Keyframe<SpriteFrameKeyframe>",},
           ],"resourceVersion":"1.0","resourceType":"KeyframeStore<SpriteFrameKeyframe>",},"trackColour":0,"inheritsTrackColour":true,"builtinName":0,"traits":0,"interpolation":1,"tracks":[],"events":[],"modifiers":[],"isCreationTrack":false,"resourceVersion":"1.0","tags":[],"resourceType":"GMSpriteFramesTrack",},
     ],
     "visibleRange": null,
@@ -58,21 +58,21 @@
     "yorigin": 0,
     "eventToFunction": {},
     "eventStubScript": null,
-    "parent": {"name":"sUIBar","path":"sprites/sUIBar/sUIBar.yy",},
+    "parent": {"name":"sUIBarv5","path":"sprites/sUIBarv5/sUIBarv5.yy",},
     "resourceVersion": "1.3",
-    "name": "sUIBar",
+    "name": "sUIBarv5",
     "tags": [],
     "resourceType": "GMSequence",
   },
   "layers": [
-    {"visible":true,"isLocked":false,"blendMode":0,"opacity":100.0,"displayName":"default","resourceVersion":"1.0","name":"2b7c7241-cf4f-41da-a5b6-c140193952f3","tags":[],"resourceType":"GMImageLayer",},
+    {"visible":true,"isLocked":false,"blendMode":0,"opacity":100.0,"displayName":"default","resourceVersion":"1.0","name":"114634ff-3c7e-4e8f-995c-8c8d09fb1cf6","tags":[],"resourceType":"GMImageLayer",},
   ],
   "parent": {
     "name": "Sprites",
     "path": "folders/Sprites.yy",
   },
   "resourceVersion": "1.0",
-  "name": "sUIBar",
+  "name": "sUIBarv5",
   "tags": [],
   "resourceType": "GMSprite",
 }

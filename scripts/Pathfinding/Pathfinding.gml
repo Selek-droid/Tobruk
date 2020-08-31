@@ -26,7 +26,7 @@ function BreadthSearch(col, row, movement)
 			var nextHex = FindNeighbor(xx, yy, i); 
 			if HowFar(nextHex,startHex) > movement
 			{
-				show_debug_message("Breadthsearch halted after mvmt over " + string(movement));
+				// show_debug_message("Breadthsearch halted after mvmt over " + string(movement));
 				ds_list_destroy(frontier); 
 				ds_list_destroy(visited); 
 				exit;
@@ -58,7 +58,7 @@ function BreadthSearch(col, row, movement)
 						else
 						{
 							ds_list_add(oMap.possibleMoves, nextHex);
-							show_debug_message("Next poss move: " + string(nextHex));
+							// show_debug_message("Next poss move: " + string(nextHex));
 							oMap.needPath = false;
 						}
 					}

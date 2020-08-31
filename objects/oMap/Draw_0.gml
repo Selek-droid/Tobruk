@@ -6,8 +6,9 @@ draw_self();
 if hexOverlay
 {
 	draw_sprite(sHexOverlay, -1, 0, 120);
-
 }
+
+
 
 //draw_sprite(sBr7Arm8Hus, -1, 500, 300);
 //draw_sprite(sIt23InfDiv, -1, 400, 300);
@@ -100,51 +101,59 @@ for (var col = 0; col < 26; col += 1;)
 				var pixelCoords = HexToPixel(col, row);
 				var influence = hexWithUnit.tacticalValue + hexWithUnit.strategicValue;
 				draw_set_color(c_navy);
-				draw_text(pixelCoords[0] + 70, pixelCoords[1] + 70,string(hexWithUnit.tacticalValue));
+				draw_text(pixelCoords[0] + 20, pixelCoords[1] + 10, string(col) + 
+					" , " + string(row));
+				draw_text(pixelCoords[0] + 30, pixelCoords[1] + 30,string(hexWithUnit.tacticalValue));
 				draw_set_color(c_white);
-				if influence > 400
+				if influence > 200
 				{
 					draw_sprite_ext(sRedHex, -1, pixelCoords[0], pixelCoords[1], 1, 1, 0, c_white, 0.8);
 				}
 				
-				if influence > 300 && (influence <= 400)
+				if influence > 100 && (influence <= 200)
 				{
 					draw_sprite_ext(sRedHex, -1, pixelCoords[0], pixelCoords[1], 1, 1, 0, c_white, 0.7);
 				}
 				
-				if influence > 250 && (influence <= 300)
+				if influence > 80 && (influence <= 100)
 				{
 					draw_sprite_ext(sRedHex, -1, pixelCoords[0], pixelCoords[1], 1, 1, 0, c_white, 0.6);
 				}
 				
-				else if (influence > 200) && (influence <= 250)
+				else if (influence > 60) && (influence <= 80)
 				{
 					draw_sprite_ext(sRedHex, -1, pixelCoords[0], pixelCoords[1], 1, 1, 0, c_white, 0.5);
 				}
 				
-				else if (influence > 150) && (influence <= 200)
+				else if (influence > 40) && (influence <= 60)
 				{
 					draw_sprite_ext(sRedHex, -1, pixelCoords[0], pixelCoords[1], 1, 1, 0, c_white, 0.4);
 				}
 				
-				else if (influence > 100) && (influence <= 150)
+				else if (influence > 20) && (influence <= 40)
 				{
 					draw_sprite_ext(sRedHex, -1, pixelCoords[0], pixelCoords[1], 1, 1, 0, c_white, 0.3);
 				}
 				
-				else if (influence > 50) && (influence <= 100)
+				else if (influence > 10) && (influence <= 20)
 				{
 					draw_sprite_ext(sRedHex, -1, pixelCoords[0], pixelCoords[1], 1, 1, 0, c_white, 0.2);
 				}
 				
-				else if (influence > 0) && (influence <= 50)
+				else if (influence > 5) && (influence <= 10)
 				{
-					draw_sprite_ext(sRedHex, -1, pixelCoords[0], pixelCoords[1], 1, 1, 0, c_white, 0.1);
+					draw_sprite_ext(sRedHex, -1, pixelCoords[0], pixelCoords[1], 1, 1, 0, c_white, 0.05);
+				}
+				
+				
+				else if (influence > 0) && (influence <= 5)
+				{
+					draw_sprite_ext(sRedHex, -1, pixelCoords[0], pixelCoords[1], 1, 1, 0, c_white, 0.05);
 				}
 				
 				else if (influence <= 0) 
 				{
-					draw_sprite_ext(sRedHex, -1, pixelCoords[0], pixelCoords[1], 1, 1, 0, c_white, 0.1);
+					draw_sprite_ext(sRedHex, -1, pixelCoords[0], pixelCoords[1], 1, 1, 0, c_white, 0);
 				}
 				
 			}
@@ -186,5 +195,12 @@ if needPath
 			pixelCoords[0], pixelCoords[1], 1, 1, 0, color, 1);
 	}
 }
+
+//if waitForAI
+//{
+//	oMap.combatMessage = "Press spacebar to begin impulse 1" ;
+//	draw_sprite(sAIThink2, -1, (room_width / 2) - 256, (room_height/2) - 128);
+//	show_debug_message("Wait for AI is true");
+//}
 
 
